@@ -12,7 +12,7 @@ export default function Header() {
     const location = useLocation();
     const navigate = useNavigate();
     // const dispatch = useDispatch();
-    // const { currentUser } = useSelector((state) => state.user);
+    const { currentUser } = useSelector((state) => state.user);
     // const { theme } = useSelector((state) => state.theme);
     // const [searchTerm, setSearchTerm] = useState('');
 
@@ -78,11 +78,37 @@ export default function Header() {
           {/* {theme === 'light' ? <FaSun /> : <FaMoon />} */}
           <FaMoon />
         </Button>
-        <Link to='/sign-in'>
-            <Button gradientDuoTone='purpleToBlue' outline pill>
-                Sign In
+        {currentUser ? (
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar alt='user' img={currentUser.profilePicture} rounded />
+            }
+          >
+            <Dropdown.Header>
+              <span className='block text-sm'>@{currentUser.username}</span>
+              <span className='block text-sm font-medium truncate'>
+                {currentUser.email}
+              </span>
+            </Dropdown.Header>
+            <Link to={'/dashboard?tab=profile'}>
+              <Dropdown.Item>Profile</Dropdown.Item>
+            </Link>
+            <Dropdown.Divider />
+            <Dropdown.Item
+              // onClick={handleSignout}
+             >
+              Sign out
+             </Dropdown.Item>
+          </Dropdown>
+        ) : (
+          <Link to='/sign-in'>
+            <Button gradientDuoTone='purpleToBlue' outline>
+              Sign In
             </Button>
-        </Link>
+          </Link>
+        )}
 
         <Navbar.Toggle />
       </div>
