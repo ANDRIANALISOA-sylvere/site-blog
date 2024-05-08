@@ -26,7 +26,7 @@ export const createClient = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-  res.send("Client Created")
+  // res.send("Client Created")
 };
 
 // export const getclients = async (req, res, next) => {
