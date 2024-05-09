@@ -42,10 +42,10 @@ export const getclients = async (req, res, next) => {
       ...(req.query.description && { description: req.query.description }),
       ...(req.query.slug && { slug: req.query.slug }),
       ...(req.query.clientId && { _id: req.query.clientId }),
-      ...(req.query.searchTerm && {
+      ...(req.query.searchClientTerm && {
         $or: [
-          { name: { $regex: req.query.searchTerm, $options: 'i' } },
-          { gender: { $regex: req.query.searchTerm, $options: 'i' } },
+          { name: { $regex: req.query.searchClientTerm, $options: 'i' } },
+          { gender: { $regex: req.query.searchClientTerm, $options: 'i' } },
         ],
       }),
     })
