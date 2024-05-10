@@ -9,7 +9,8 @@ import { useSelector} from 'react-redux'
 export default function DashClients() {
   const {currentUser} = useSelector((state) => state.user)
   const [userClients, setUserClients] = useState([])
-  console.log(userClients);
+  const [showMore, setShowMore] = useState(true)
+  // console.log(userClients);
   useEffect(() => {
     const fetchClients = async () => {
       try {
@@ -17,6 +18,9 @@ export default function DashClients() {
         const data = await res.json()
         if(res.ok) {
           setUserClients(data.clients)
+          if(data.clients.length < 9){
+            setShowMore(false)
+          }
         }
         
       } catch (error) {
@@ -28,9 +32,25 @@ export default function DashClients() {
     }
   },[currentUser._id])
 
+  const handleShowMore = async () => {
+    const startIndex = userClients.length;
+    try {
+      const res = await fetch(`/api/client/getclients?userId=${currentUser._id}&&startIndex=${startIndex}`)
+      const data = await res.json()
+      if(res.ok) {
+        setUserClients((prev)=> [...prev, ...data.clients])
+        if (data.clients.length < 9) {
+          setShowMore(false)
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-      <div>
+      <div className='mb-4'>
       <form 
         // onSubmit={handleSubmit}
       >
@@ -89,6 +109,16 @@ export default function DashClients() {
               ))
             }
           </Table>
+          {
+            showMore && (
+              <button
+                onClick={handleShowMore}
+                className='w-full text-teal-500 self-center text-sm py-7'
+              >
+                Show more
+              </button>
+            )
+          }
         </>
       ) : (
         <p>There is no clients yet!</p>
