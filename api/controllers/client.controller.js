@@ -90,25 +90,26 @@ export const deleteclient = async (req, res, next) => {
   }
 };
 
-// export const updatepost = async (req, res, next) => {
-//   if (!req.user.isAdmin || req.user.id !== req.params.userId) {
-//     return next(errorHandler(403, 'You are not allowed to update this post'));
-//   }
-//   try {
-//     const updatedPost = await Post.findByIdAndUpdate(
-//       req.params.postId,
-//       {
-//         $set: {
-//           title: req.body.title,
-//           content: req.body.content,
-//           category: req.body.category,
-//           image: req.body.image,
-//         },
-//       },
-//       { new: true }
-//     );
-//     res.status(200).json(updatedPost);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+export const updateclient = async (req, res, next) => {
+  if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+    return next(errorHandler(403, 'You are not allowed to update this client'));
+  }
+  try {
+    const updatedClient = await Client.findByIdAndUpdate(
+      req.params.clientId,
+      {
+        $set: {
+          name: req.body.name,
+          birthday: req.body.birthday,
+          gender: req.body.gender,
+          description:req.body.description,
+          image: req.body.image,
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedClient);
+  } catch (error) {
+    next(error);
+  }
+};

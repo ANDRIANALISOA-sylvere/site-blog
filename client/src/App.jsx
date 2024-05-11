@@ -16,6 +16,7 @@ import PostPage from './pages/PostPage';
 import ScrollToTop from './components/ScrollToTop';
 import Search from './pages/Search';
 import CreateClient from './pages/CreateClient';
+import UpdateClient from './pages/UpdateClient'
 import SearchClient from './pages/SearchClient';
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/update-post/:postId' element={<UpdatePost />} />
           <Route path='/create-client' element={<CreateClient />} />
+          <Route path='/update-client/:clientId' element={<UpdateClient />} />
         </Route>
         <Route path='/projects' element={<Projects />} />
         <Route path='/post/:postSlug' element={<PostPage />} />
