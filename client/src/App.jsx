@@ -18,6 +18,8 @@ import Search from './pages/Search';
 import CreateClient from './pages/CreateClient';
 import UpdateClient from './pages/UpdateClient'
 import SearchClient from './pages/SearchClient';
+import ClientPage from './pages/ClientPage'
+import ClientCvPage from './pages/ClientCvPage'
 
 export default function App() {
   return (
@@ -39,6 +41,8 @@ export default function App() {
           <Route path='/update-post/:postId' element={<UpdatePost />} />
           <Route path='/create-client' element={<CreateClient />} />
           <Route path='/update-client/:clientId' element={<UpdateClient />} />
+          <Route path='/client/:clientSlug' element={<ClientPage />} />
+          <Route path='/clientcv/:clientCvSlug' element={<ClientCvPage />} />
         </Route>
         <Route path='/projects' element={<Projects />} />
         <Route path='/post/:postSlug' element={<PostPage />} />
