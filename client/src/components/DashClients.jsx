@@ -16,6 +16,7 @@ export default function DashClients() {
   const [searchClientTerm, setSearchClientTerm]=useState('')
 
   const [filteredClients, setFilteredClients] = useState([]);
+  const [genderFilter, setGenderFilter] = useState('all');
 
   useEffect(() => {
     const fetchClients = async () => {
@@ -79,23 +80,37 @@ export default function DashClients() {
   };
 
   useEffect(() => {
-    setFilteredClients(
-      userClients.filter((client) =>
+    let clients = userClients;
+    if (searchClientTerm) {
+      clients = clients.filter((client) =>
         client.name.toLowerCase().includes(searchClientTerm.toLowerCase())
-      )
-    );
-  }, [searchClientTerm, userClients]);
+      );
+    }
+    if (genderFilter !== 'all') {
+      clients = clients.filter((client) => client.gender === genderFilter);
+    }
+    setFilteredClients(clients);
+  }, [searchClientTerm, userClients, genderFilter]);
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={(e) => e.preventDefault()} className='mb-5'>
           <input
             type="text"
             value={searchClientTerm}
             onChange={(e) => setSearchClientTerm(e.target.value)}
             placeholder="Search Client..."
-            className=' w-1/4 border disabled:cursor-not-allowed disabled:opacity-50 mb-5 mr-5 border-gray-300 bg-gray-50 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm pr-10 rounded-lg'
+            className=' w-1/4 border disabled:cursor-not-allowed disabled:opacity-50  mr-5 border-gray-300 bg-gray-50 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm pr-10 rounded-lg'
           />
+          <select
+            value={genderFilter}
+            onChange={(e) => setGenderFilter(e.target.value)}
+            className='mr-5 w-1/8 border disabled:cursor-not-allowed disabled:opacity-50 border-gray-300 bg-gray-50 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm rounded-lg'
+          >
+            <option value="all">All Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
           <button type="submit">Enter</button>
     </form>
       {currentUser.isAdmin && filteredClients.length > 0 ? (
