@@ -3,24 +3,26 @@ import { Button, Select, TextInput,Table, Modal } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { useSelector} from 'react-redux'
+import { useSelector,useDispatch} from 'react-redux'
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
 
 export default function DashClients() {
   const {currentUser} = useSelector((state) => state.user)
   const [userClients, setUserClients] = useState([])
-  // console.log(userClients);
   const [showMore, setShowMore] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [clientIdToDelete, setClientIdToDelete] = useState('');
+  const [searchClientTerm, setSearchClientTerm]=useState('')
 
-  // console.log(userClients);
+  const [filteredClients, setFilteredClients] = useState([]);
+
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const res = await fetch(`/api/client/getclients?userId=${currentUser._id}`)
+        const res = await fetch(`/api/client/getclients`)
         const data = await res.json()
+
         if(res.ok) {
           setUserClients(data.clients)
           if(data.clients.length < 9){
@@ -76,24 +78,27 @@ export default function DashClients() {
     }
   };
 
+  useEffect(() => {
+    setFilteredClients(
+      userClients.filter((client) =>
+        client.name.toLowerCase().includes(searchClientTerm.toLowerCase())
+      )
+    );
+  }, [searchClientTerm, userClients]);
+
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-      <div className='mb-4'>
-      <form 
-        // onSubmit={handleSubmit}
-      >
-        <TextInput
-          type='text'
-          placeholder='Search client...'
-          rightIcon={AiOutlineSearch}
-          className=' lg:inline'
-          // value={searchTerm}
-          // onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </form>
-      </div>
-
-      {currentUser.isAdmin && userClients.length > 0 ? (
+    <form onSubmit={(e) => e.preventDefault()}>
+          <input
+            type="text"
+            value={searchClientTerm}
+            onChange={(e) => setSearchClientTerm(e.target.value)}
+            placeholder="Search Client..."
+            className=' w-1/4 border disabled:cursor-not-allowed disabled:opacity-50 mb-5 mr-5 border-gray-300 bg-gray-50 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm pr-10 rounded-lg'
+          />
+          <button type="submit">Enter</button>
+    </form>
+      {currentUser.isAdmin && filteredClients.length > 0 ? (
         <>
           <Table hoverable className='shadow-md' >
             <Table.Head>
@@ -106,7 +111,7 @@ export default function DashClients() {
               <Table.HeadCell><span>Edit</span></Table.HeadCell>
             </Table.Head>
             {
-              userClients.map((client) => (
+              filteredClients.map((client) => (
                 <Table.Body className='divide-y' key={client._id}>
                   <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
                     <Table.Cell>

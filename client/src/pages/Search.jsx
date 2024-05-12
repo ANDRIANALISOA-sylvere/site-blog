@@ -24,12 +24,14 @@ export default function Search() {
     const searchTermFromUrl = urlParams.get('searchTerm');
     const sortFromUrl = urlParams.get('sort');
     const categoryFromUrl = urlParams.get('category');
-    if (searchTermFromUrl || sortFromUrl || categoryFromUrl) {
+    const genderFromUrl = urlParams.get('gender')
+    if (searchTermFromUrl || sortFromUrl || categoryFromUrl || genderFromUrl) {
       setSidebarData({
         ...sidebarData,
         searchTerm: searchTermFromUrl,
         sort: sortFromUrl,
         category: categoryFromUrl,
+        gender: genderFromUrl
       });
     }
 
@@ -67,6 +69,7 @@ export default function Search() {
       const category = e.target.value || 'uncategorized';
       setSidebarData({ ...sidebarData, category });
     }
+
   };
 
   const handleSubmit = (e) => {

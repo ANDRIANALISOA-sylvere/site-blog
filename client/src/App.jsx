@@ -32,7 +32,7 @@ export default function App() {
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/search' element={<Search />} />
-        <Route path='/searchclient' element={<SearchClient />} />
+        
         <Route element={<PrivateRoute />}>
           <Route path='/dashboard' element={<Dashboard />} />
         </Route>
@@ -43,6 +43,7 @@ export default function App() {
           <Route path='/update-client/:clientId' element={<UpdateClient />} />
           <Route path='/client/:clientSlug' element={<ClientPage />} />
           <Route path='/clientcv/:clientCvSlug' element={<ClientCvPage />} />
+          <Route path='/searchclient' element={<SearchClient />} />
         </Route>
         <Route path='/projects' element={<Projects />} />
         <Route path='/post/:postSlug' element={<PostPage />} />

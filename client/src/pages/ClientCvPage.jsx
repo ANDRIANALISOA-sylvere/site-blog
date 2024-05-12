@@ -7,7 +7,7 @@ export default function ClientCvPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [clientCv, setClientCv] = useState(null);
-    console.log(clientCv);
+    // console.log(clientCv);
   useEffect(() => {
     const fetchClientCv = async () => {
       try {
@@ -15,7 +15,7 @@ export default function ClientCvPage() {
         const res = await fetch(`/api/client/getclients?slug=${clientCvSlug}`);
         const data = await res.json();
         
-        console.log(data);
+        // console.log(data);
         if (!res.ok) {
           setError(true);
           setLoading(false);
