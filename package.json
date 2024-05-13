@@ -21,6 +21,7 @@
     "mongoose": "^8.3.1",
     "nodemon": "^3.0.2",
     "pinyin": "^4.0.0-alpha.0",
+    "react-data-export": "^0.6.0",
     "slugify": "^1.6.6"
   }
 }

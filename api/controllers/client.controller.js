@@ -12,14 +12,6 @@ export const createClient = async (req, res, next) => {
     return next(errorHandler(400, 'Please provide all required client fields'));
   }
 
-  // const slug = slugify(req.body.name, {
-  //   replacement: '-',  // 將空格和非字母或數字字符替換為'-'
-  //   remove: undefined, // 正則表達式匹配要刪除的字符
-  //   lower: true,       // 轉換為小寫
-  //   strict: true,      // 剝去不適合URL的字符
-  //   locale: 'zh'       // 語言代碼
-  // });
-
   const slug = req.body.name
     .split(' ')
     .join('-')
@@ -36,7 +28,6 @@ export const createClient = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-  // res.send("Client Created")
 };
 
 export const getclients = async (req, res, next) => {
@@ -56,6 +47,7 @@ export const getclients = async (req, res, next) => {
       ...(req.query.searchClientTerm && {
         $or: [
           { name: { $regex: req.query.searchClientTerm, $options: 'i' } },
+          { chinesename: { $regex: req.query.searchClientTerm, $options: 'i' } },
           { gender: { $regex: req.query.searchClientTerm, $options: 'i' } },
         ],
       }),
