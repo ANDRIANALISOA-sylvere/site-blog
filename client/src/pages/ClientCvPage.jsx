@@ -1,6 +1,7 @@
 import { Button, Spinner } from 'flowbite-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import {useReactToPrint} from "react-to-print"
 
 export default function ClientCvPage() {
   const { clientCvSlug } = useParams();
@@ -8,7 +9,10 @@ export default function ClientCvPage() {
   const [error, setError] = useState(false);
   const [clientCv, setClientCv] = useState(null);
     // console.log(clientCv);
-
+    const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
 
   useEffect(() => {
@@ -45,8 +49,11 @@ export default function ClientCvPage() {
         <Spinner size='xl' />
       </div>
     );
+
+    
+
   return (
-    <main className='p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
+    <main ref={componentRef} className='p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
       <h1 className='text-center '>履歷</h1>
       <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl'>
         {clientCv && clientCv.name}
@@ -72,6 +79,8 @@ export default function ClientCvPage() {
         className='p-3 max-w-2xl mx-auto w-full post-content'
         dangerouslySetInnerHTML={{ __html: clientCv && clientCv.description }}
       ></div>
+    {/* <button onClick={generatePDF}>PDF</button> */}
+    <button onClick={handlePrint}>生成 PDF</button>
     </main>
   );
 }
