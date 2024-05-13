@@ -45,17 +45,14 @@ export default function ClientPage() {
   return (
     <main className='p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
       <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl'>
-        {client && client.name}
+      {client && client.chinesename}{client && client.name} 
       </h1>
       <div className='flex justify-around'>
-        <Link
-            to={`/searchclient?gender=${client && client.gender}`}
-            className='self-center'
-        >
-            <Button color='gray' pill size='xs'>
-            {client && client.gender}
-            </Button>
-        </Link>
+        <div className='flex'>
+          <h3>姓別：</h3>
+          <p>{client && client.gender}</p>
+        </div>
+        
         <h2>Birthday: {client && client.birthday}</h2>
       </div>
       

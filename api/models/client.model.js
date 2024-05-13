@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+// import pinyin from 'pinyin';
 
 const clientSchema = new mongoose.Schema(
   {
@@ -13,6 +14,11 @@ const clientSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
+      trim:true
+    },
+    chinesename: {
+      type: String,
+      required: false,
       trim:true
     },
     birthday: {
@@ -38,6 +44,8 @@ const clientSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+
 
 const Client = mongoose.model('Client', clientSchema);
 

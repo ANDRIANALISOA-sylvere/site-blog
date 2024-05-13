@@ -117,7 +117,8 @@ export default function DashClients() {
         <>
           <Table hoverable className='shadow-md' >
             <Table.Head>
-              <Table.HeadCell>Name</Table.HeadCell>
+              <Table.HeadCell>English Name</Table.HeadCell>
+              <Table.HeadCell>Chinese Name</Table.HeadCell>
               <Table.HeadCell>Image</Table.HeadCell>
               <Table.HeadCell>Gender</Table.HeadCell>
               <Table.HeadCell>Birthday</Table.HeadCell>
@@ -132,6 +133,11 @@ export default function DashClients() {
                     <Table.Cell>
                     <Link className='font-medium text-gray-900 dark:text-white' to={`/client/${client.slug}`}>
                     {client.name}
+                    </Link>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Link className='font-medium text-gray-900 dark:text-white' to={`/client/${client.slug}`}>
+                    {client.chinesename}
                     </Link>
                   </Table.Cell>
                     <Table.Cell>

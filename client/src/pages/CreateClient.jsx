@@ -12,13 +12,16 @@ import { useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
+import slugify from 'slugify';
+
 
 export default function CreateClient() {
     const [file, setFile] = useState(null);
     const [imageUploadProgress, setImageUploadProgress] = useState(null);
     const [imageUploadError, setImageUploadError] = useState(null);
     const [formData, setFormData] = useState({});
-    console.log(formData);
+
+    // console.log(formData);
     const [publishError, setPublishError] = useState(null);
   
     const navigate = useNavigate();
@@ -62,6 +65,7 @@ export default function CreateClient() {
 
       const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
           const res = await fetch('/api/client/createclient', {
             method: 'POST',
@@ -94,12 +98,22 @@ export default function CreateClient() {
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
           <TextInput
             type='text'
-            placeholder='Name'
+            placeholder='English Name'
             required
             id='clientname'
             className='flex-1'
             onChange={(e) =>
               setFormData({ ...formData, name: e.target.value })
+            }
+          />
+          <TextInput
+            type='text'
+            placeholder='Chinese Name'
+            required
+            id='clientname'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, chinesename: e.target.value })
             }
           />
           <TextInput

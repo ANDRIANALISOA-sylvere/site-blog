@@ -1,5 +1,6 @@
 import Client from '../models/client.model.js';
 import { errorHandler } from '../utils/error.js';
+import slugify from 'slugify'
 
 
 export const createClient = async (req, res, next) => {
@@ -10,11 +11,20 @@ export const createClient = async (req, res, next) => {
   if (!req.body.name || !req.body.description || !req.body.birthday || !req.body.gender) {
     return next(errorHandler(400, 'Please provide all required client fields'));
   }
+
+  // const slug = slugify(req.body.name, {
+  //   replacement: '-',  // 將空格和非字母或數字字符替換為'-'
+  //   remove: undefined, // 正則表達式匹配要刪除的字符
+  //   lower: true,       // 轉換為小寫
+  //   strict: true,      // 剝去不適合URL的字符
+  //   locale: 'zh'       // 語言代碼
+  // });
+
   const slug = req.body.name
     .split(' ')
     .join('-')
     .toLowerCase()
-    .replace(/[^a-zA-Z0-9-]/g, '');
+    .replace(/[^a-zA-Z0-9-]/g, '')
   const newClient = new Client({
     ...req.body,
     slug,
@@ -38,6 +48,7 @@ export const getclients = async (req, res, next) => {
       ...(req.query.userId && { userId: req.query.userId }),
       ...(req.query.gender && { gender: req.query.gender }),
       ...(req.query.name && { name: req.query.name }),
+      ...(req.query.chinesename && { chinesename: req.query.chinesename }),
       ...(req.query.birthday && { birthday: req.query.birthday }),
       ...(req.query.description && { description: req.query.description }),
       ...(req.query.slug && { slug: req.query.slug }),
@@ -100,6 +111,7 @@ export const updateclient = async (req, res, next) => {
       {
         $set: {
           name: req.body.name,
+          chinesename:req.body.chinesename,
           birthday: req.body.birthday,
           gender: req.body.gender,
           description:req.body.description,
