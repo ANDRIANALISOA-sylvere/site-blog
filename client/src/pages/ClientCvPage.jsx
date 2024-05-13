@@ -53,34 +53,44 @@ export default function ClientCvPage() {
     
 
   return (
-    <main ref={componentRef} className='p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
-      <h1 className='text-center '>履歷</h1>
-      <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl'>
-        {clientCv && clientCv.name}
-      </h1>
-      <div className='flex justify-around'>
-        <Link
-            to={`/searchclient?gender=${clientCv && clientCv.gender}`}
-            className='self-center'
-        >
-            <Button color='gray' pill size='xs'>
-            {clientCv && clientCv.gender}
-            </Button>
-        </Link>
-        <h2>Birthday: {clientCv && clientCv.birthday}</h2>
+    <main>
+      <div ref={componentRef} className='p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
+        <h1 className='text-center '>履歷</h1>
+        <h1 className='text-3xl mt-10 p-3 text-center font-serif max-w-2xl mx-auto lg:text-4xl'>
+          {clientCv && clientCv.name}
+        </h1>
+        <div className='flex justify-around'>
+          <Link
+              to={`/searchclient?gender=${clientCv && clientCv.gender}`}
+              className='self-center'
+          >
+              <Button color='gray' pill size='xs'>
+              {clientCv && clientCv.gender}
+              </Button>
+          </Link>
+          <h2>Birthday: {clientCv && clientCv.birthday}</h2>
+        </div>
+        
+        <img
+          src={clientCv && clientCv.image}
+          alt={clientCv && clientCv.name}
+          className='mt-10 p-3 max-h-[600px] w-1/4 object-cover'
+        />
+        <div
+          className='p-3 max-w-2xl mx-auto w-full post-content'
+          dangerouslySetInnerHTML={{ __html: clientCv && clientCv.description }}
+        ></div>
+      {/* <button onClick={generatePDF}>PDF</button> */}
       </div>
-      
-      <img
-        src={clientCv && clientCv.image}
-        alt={clientCv && clientCv.name}
-        className='mt-10 p-3 max-h-[600px] w-1/4 object-cover'
-      />
-      <div
-        className='p-3 max-w-2xl mx-auto w-full post-content'
-        dangerouslySetInnerHTML={{ __html: clientCv && clientCv.description }}
-      ></div>
-    {/* <button onClick={generatePDF}>PDF</button> */}
-    <button onClick={handlePrint}>生成 PDF</button>
+      <div className='flex justify-center mb-10'>
+        <button
+        onClick={handlePrint}
+        >
+          生成 PDF
+        </button>
+      </div>
+
     </main>
+
   );
 }
