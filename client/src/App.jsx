@@ -45,7 +45,7 @@ export default function App() {
           <Route path='/clientcv/:clientCvSlug' element={<ClientCvPage />} />
           <Route path='/searchclient' element={<SearchClient />} />
         </Route>
-        <Route path='/projects' element={<Projects />} />
+        {/* <Route path='/projects' element={<Projects />} /> */}
         <Route path='/post/:postSlug' element={<PostPage />} />
       </Routes>
       <Footer />

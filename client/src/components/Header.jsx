@@ -55,10 +55,9 @@ export default function Header() {
         to='/'
         className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'
       >
-        <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
-          Sahand's
+        <span className='px-2 py-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
+          Article
         </span>
-        Blog
       </Link>
       <form onSubmit={handleSubmit}>
         <TextInput
@@ -118,9 +117,9 @@ export default function Header() {
         <Navbar.Link active={path === '/about'} as={'div'}>
           <Link to='/about'>About</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === '/projects'} as={'div'}>
+        {/* <Navbar.Link active={path === '/projects'} as={'div'}>
           <Link to='/projects'>Projects</Link>
-        </Navbar.Link>
+        </Navbar.Link> */}
       </Navbar.Collapse>
     </Navbar>
   );

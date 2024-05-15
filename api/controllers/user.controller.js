@@ -1,6 +1,10 @@
 import bcryptjs from 'bcryptjs'
 import { errorHandler } from '../utils/error.js';
 import User from '../models/user.model.js';
+import Token from '../models/tokenModel.js'
+import crypto from 'crypto'
+import {sendEmail} from '../utils/sendEmail.js';
+import nodemailer from 'nodemailer';
 
 export const test = (req,res) => {
     res.json({message: 'API is working'})
@@ -131,5 +135,70 @@ export const getUser = async (req, res, next) => {
     res.status(200).json(rest);
   } catch (error) {
     next(error);
+  }
+};
+
+export const forgotPassword = async (req, res,next) => {
+  // res.send("Forgot Password")
+  const { email } = req.body;
+  const user = await User.findOne({ email }); // check the email if in the user
+
+  // console.log(user);
+  if (!user) {
+  res.status(404);
+  throw new Error("User does not exist");
+  }
+
+  // Delete token if it exists in DB
+  let token = await Token.findOne({ userId: user._id });
+  if (token) {
+  await token.deleteOne();
+  }
+  console.log(token);
+
+  // Create Reste Token
+  let resetToken = crypto.randomBytes(32).toString("hex") + user._id;
+  console.log(resetToken);
+  // res.send("Forgot password")
+
+  // Hash token before saving to DB
+  const hashedToken = crypto
+  .createHash("sha256")
+  .update(resetToken)
+  .digest("hex");
+  // console.log(hashedToken);
+
+  // Save Token to DB
+  await new Token({
+  userId: user._id,
+  token: hashedToken,
+  createdAt: Date.now(),
+  expiresAt: Date.now() + 30 * (60 * 1000), // Thirty minutes
+  }).save();
+
+  // Construct Reset Url
+  const resetUrl = `https://blog-fj0n.onrender.com//resetpassword/${resetToken}`;
+
+  // Reset Email
+  const message = `
+      <h2>Hello ${user.name}</h2>
+      <p>Please use the url below to reset your password</p>  
+      <p>This reset link is valid for only 30minutes.</p>
+
+      <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
+
+      <p>Regards...</p>
+      <p>BabyCode Team</p>
+  `;
+  const subject = "Password Reset Request";
+  const send_to = user.email;
+  const sent_from = process.env.EMAIL_USER;
+
+  try {
+      await sendEmail(subject, message, send_to, sent_from);
+      res.status(200).json({ success: true, message: "Reset Email Sent" });
+  } catch (error) {
+      res.status(500);
+      throw new Error("Email not sent, please try again");
   }
 };
