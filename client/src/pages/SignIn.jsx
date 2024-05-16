@@ -5,6 +5,7 @@ import {
   signInStart,
   signInSuccess,
   signInFailure,
+  forgotFailure
 } from '../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import OAuth from '../components/OAuth';
@@ -109,6 +110,12 @@ export default function SignIn() {
             <span>Don't have an account?</span>
             <Link to='/sign-up' className='text-blue-500'>
               Sign Up
+            </Link>
+          </div>
+          <div className='flex gap-2 text-sm mt-5'>
+            <span>Forgot Password?</span>
+            <Link to='/forgot' className='text-blue-500'>
+              Forgot
             </Link>
           </div>
           {errorMessage && (

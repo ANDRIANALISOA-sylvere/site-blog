@@ -177,11 +177,11 @@ export const forgotPassword = async (req, res,next) => {
   }).save();
 
   // Construct Reset Url
-  const resetUrl = `https://blog-fj0n.onrender.com//resetpassword/${resetToken}`;
+  const resetUrl = `http://localhost:5173/resetpassword/${resetToken}`;
 
   // Reset Email
   const message = `
-      <h2>Hello ${user.name}</h2>
+      <h2>Hello</h2>
       <p>Please use the url below to reset your password</p>  
       <p>This reset link is valid for only 30minutes.</p>
 
@@ -201,4 +201,42 @@ export const forgotPassword = async (req, res,next) => {
       res.status(500);
       throw new Error("Email not sent, please try again");
   }
+};
+
+export const resetPassword = async (req, res, next) => {
+  const { password } = req.body;
+  const { resetToken } = req.params;
+
+  const hashedToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  const userToken = await Token.findOne({
+    token: hashedToken,
+    expiresAt: { $gt: Date.now() },
+  });
+
+  if (!userToken) {
+    return res.status(404).json({ message: "Invalid or Expired Token" });
+  }
+
+  const user = await User.findOne({ _id: userToken.userId });
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  user.password = password;
+  if (user.password) {
+    if (user.password.length < 6) {
+      return next(errorHandler(400, 'Password must be at least 6 characters'));
+    }
+    user.password = bcryptjs.hashSync(req.body.password, 10);
+  }
+  await user.save();
+
+  res.status(200).json({
+    message: "Password Reset Successful, Please Login",
+  });
 };

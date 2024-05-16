@@ -12,7 +12,6 @@ import { useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
-import slugify from 'slugify';
 
 
 export default function CreateClient() {

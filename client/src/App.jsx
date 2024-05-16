@@ -20,6 +20,8 @@ import UpdateClient from './pages/UpdateClient'
 import SearchClient from './pages/SearchClient';
 import ClientPage from './pages/ClientPage'
 import ClientCvPage from './pages/ClientCvPage'
+import Forgot from './pages/Forgot';
+import Reset from './pages/Reset';
 
 export default function App() {
   return (
@@ -32,6 +34,8 @@ export default function App() {
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/search' element={<Search />} />
+        <Route path='/forgot' element={<Forgot />} />
+        <Route path='/resetpassword/:resetToken' element={<Reset />} />
         
         <Route element={<PrivateRoute />}>
           <Route path='/dashboard' element={<Dashboard />} />
