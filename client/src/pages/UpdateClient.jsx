@@ -21,6 +21,7 @@ export default function CreateClient() {
     const [imageUploadError, setImageUploadError] = useState(null);
     const [formData, setFormData] = useState({});
     const [name, setName] = useState('')
+    const [chinesename, setChineseName] = useState('')
 
     // console.log(formData);
     const {clientId} = useParams()
@@ -131,6 +132,28 @@ export default function CreateClient() {
               setFormData({ ...formData, name: e.target.value })
             }
             value={formData.name}
+          />
+          <TextInput
+            type='text'
+            placeholder='Name'
+            required
+            id='chinesename'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, chinesename: e.target.value })
+            }
+            value={formData.chinesename}
+          />
+          <TextInput
+            type='text'
+            placeholder='ID Number'
+            required
+            id='clientid'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, idNum: e.target.value })
+            }
+            value={formData.idNum}
           />
           <TextInput
             type='date'

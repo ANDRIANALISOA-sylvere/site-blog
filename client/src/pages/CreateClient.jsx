@@ -116,6 +116,16 @@ export default function CreateClient() {
             }
           />
           <TextInput
+            type='text'
+            placeholder='ID Number'
+            required
+            id='clientid'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, idNum: e.target.value })
+            }
+          />
+          <TextInput
             type='date'
             placeholder='birthday'
             required
