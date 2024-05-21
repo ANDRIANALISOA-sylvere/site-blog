@@ -7,6 +7,11 @@ const clientSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    refferFrom: { //個案來源
+      type: String,
+      required:false,
+      trim:true
+    },
     description: {
       type: String,
       required: false,
@@ -230,6 +235,16 @@ const clientSchema = new mongoose.Schema(
       trim:true
     },
     portuguese: { 
+      type: String,
+      required:false,
+      trim:true
+    },
+    listenAndWriting: { 
+      type: String,
+      required:false,
+      trim:true
+    },
+    shorthand: { 
       type: String,
       required:false,
       trim:true

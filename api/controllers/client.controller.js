@@ -38,6 +38,7 @@ export const getclients = async (req, res, next) => {
       ...(req.query.userId && { userId: req.query.userId }),
       ...(req.query.gender && { gender: req.query.gender }),
       ...(req.query.name && { name: req.query.name }),
+      ...(req.query.refferFrom && { refferFrom: req.query.refferFrom }),
       ...(req.query.chinesename && { chinesename: req.query.chinesename }),
       ...(req.query.birthday && { birthday: req.query.birthday }),
       ...(req.query.follower && { follower: req.query.follower }),
@@ -86,6 +87,8 @@ export const getclients = async (req, res, next) => {
       ...(req.query.mandarin && { mandarin: req.query.mandarin }),
       ...(req.query.english && { english: req.query.english }),
       ...(req.query.portuguese && { portuguese: req.query.portuguese }),
+      ...(req.query.listenAndWriting && { listenAndWriting: req.query.listenAndWriting }),
+      ...(req.query.shorthand && { shorthand: req.query.shorthand }),
       ...(req.query.word && { word: req.query.word }),
       ...(req.query.excel && { excel: req.query.excel }),
       ...(req.query.powerpoint && { powerpoint: req.query.powerpoint }),
@@ -187,6 +190,7 @@ export const updateclient = async (req, res, next) => {
       {
         $set: {
           name: req.body.name,
+          refferFrom: req.body.refferFrom,
           chinesename:req.body.chinesename,
           birthday: req.body.birthday,
           gender: req.body.gender,
@@ -237,6 +241,8 @@ export const updateclient = async (req, res, next) => {
           mandarin: req.body.mandarin,
           english: req.body.english,
           portuguese: req.body.portuguese,
+          listenAndWriting: req.body.listenAndWriting,
+          shorthand: req.body.shorthand,
           word: req.body.word,
           excel: req.body.excel,
           powerpoint: req.body.powerpoint,

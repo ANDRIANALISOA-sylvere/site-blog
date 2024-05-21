@@ -121,7 +121,21 @@ export default function CreateClient() {
         className='flex flex-col gap-4' 
         onSubmit={handleSubmit}
      >
+      <div>
+        <TextInput
+            type='text'
+            placeholder='個案來源'
+            required
+            id='clientname'
+            className='flex-1'
+            onChange={(e) =>
+              setFormData({ ...formData, refferFrom: e.target.value })
+            }
+            value={formData.refferFrom}
+          />
+      </div>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+        
           <TextInput
             type='text'
             placeholder='Name'
