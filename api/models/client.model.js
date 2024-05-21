@@ -274,6 +274,11 @@ const clientSchema = new mongoose.Schema(
       required:false,
       trim:true
     },
+    drivingDetail: { 
+      type: String,
+      required:false,
+      trim:true
+    },
     gambling: { 
       type: String,
       required:false,
@@ -330,6 +335,92 @@ const clientSchema = new mongoose.Schema(
       trim:true
     },
     metFrequency: { 
+      type: String,
+      required:false,
+      trim:true
+    },
+    cocUsageMethod: { 
+      type: String,
+      required:false,
+      trim:true
+    },
+    cocExpend: { 
+      type: String,
+      required:false,
+      trim:true
+    },
+    cocYearBegin: { //開始濫用該藥物之年齡
+      type: String,
+      required:false,
+      trim:true
+    },
+    cocFrequency: { 
+      type: String,
+      required:false,
+      trim:true
+    },
+    marUsageMethod: {  //大麻
+      type: String,
+      required:false,
+      trim:true
+    },
+    marExpend: { 
+      type: String,
+      required:false,
+      trim:true
+    },
+    marYearBegin: { //開始濫用該藥物之年齡
+      type: String,
+      required:false,
+      trim:true
+    },
+    marFrequency: { 
+      type: String,
+      required:false,
+      trim:true
+    },
+    heroinUsageMethod: { 
+      type: String,
+      required:false,
+      trim:true
+    },
+    heroinExpend: { 
+      type: String,
+      required:false,
+      trim:true
+    },
+    heroinYearBegin: { //開始濫用該藥物之年齡
+      type: String,
+      required:false,
+      trim:true
+    },
+    heroinFrequency: { 
+      type: String,
+      required:false,
+      trim:true
+    },
+    otherDrugname: { 
+      type: String,
+      required:false,
+      trim:true,
+      default:'其他'
+    },
+    otherUsageMethod: { 
+      type: String,
+      required:false,
+      trim:true
+    },
+    otherExpend: { 
+      type: String,
+      required:false,
+      trim:true
+    },
+    otherYearBegin: { //開始濫用該藥物之年齡
+      type: String,
+      required:false,
+      trim:true
+    },
+    otherFrequency: { 
       type: String,
       required:false,
       trim:true

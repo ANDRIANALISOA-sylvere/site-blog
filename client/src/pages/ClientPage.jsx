@@ -1,11 +1,16 @@
-import { Button, Spinner } from 'flowbite-react';
+import { Button, Spinner,Table } from 'flowbite-react';
 import { useEffect, useState,useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {useReactToPrint} from "react-to-print"
+import { useSelector} from 'react-redux'
 
 
 export default function ClientPage() {
   const { clientSlug } = useParams();
+  const {currentUser} = useSelector((state) => state.user)
+  const [filteredClients, setFilteredClients] = useState([]);
+  const [userClients, setUserClients] = useState([])
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [client, setClient] = useState(null);
@@ -38,6 +43,28 @@ export default function ClientPage() {
     };
     fetchClient();
   }, [clientSlug]);
+
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const res = await fetch(`/api/client/getclients`)
+        const data = await res.json()
+
+        if(res.ok) {
+          setUserClients(data.clients)
+          if(data.clients.length < 9){
+            setShowMore(false)
+          }
+        }
+        
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    if(currentUser.isAdmin) {
+      fetchClients()
+    }
+  },[currentUser._id])
 
   if (loading)
     return (
@@ -209,27 +236,147 @@ export default function ClientPage() {
           <div className='outline'>
             <div className='flex justify-between p-2  '>
                 <p>駕照（貨櫃車／大巴士／巴士／貨車／小車／電單車／無）：{client && client.drivingLicense}</p>
-                <p>公司名稱：{client && client.post1company} </p>
-                <p>薪金：{client && client.post1salary} </p>
-                <p>起始年月：{client && client.post1date} </p>
-                <p>離職原因：{client && client.post1reason} </p>
-              </div>
-              <div className='flex justify-between p-2  '>
-                <p>職稱：{client && client.post2name}</p>
-                <p>公司名稱：{client && client.post2company} </p>
-                <p>薪金：{client && client.post2salary} </p>
-                <p>起始年月：{client && client.post2date} </p>
-                <p>離職原因：{client && client.post2reason} </p>
-              </div>
-              <div className='flex justify-between p-2'>
-                <p>公開就業職位：{client && client.employmentPost}</p>
-                <p>期望工作職位：{client && client.expactEmploymentPost}</p>
-                <p>期望薪資：{client && client.expactSalary}</p>
-              </div>
+                <p>關於駕照的其他詳情：{client && client.drivingDetail} </p> 
+            </div>
           </div>
         </div>
       
-        
+        <div className='mb-3'> 
+          <p className='mb-1'>個人習慣：</p>
+          <div className='flex flex-col outline'>
+            <div className='flex justify-evenly p-2  '>
+                <p>賭博（高／中／低／沒有）：{client && client.gambling}</p>
+                <p>上網（高／中／低／沒有）：{client && client.internet}</p>
+            </div>
+            <div className='flex justify-evenly p-2  '>
+                <p>酗酒（高／中／低／沒有）：{client && client.drinking}</p>
+                <p>其他：{client && client.otherBadHabit}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className='mb-3'> 
+          <div className='flex justify-between'>
+            <p className='mb-1'>濫藥情況：</p>
+            <p>曾經濫藥（是 / 否）：{client && client.adict}</p>
+          </div>
+
+          <Table className='outline'>
+            <Table.Head>
+              <Table.HeadCell>毒品名稱</Table.HeadCell>
+              <Table.HeadCell>通常使用該毒品的方法</Table.HeadCell>
+              <Table.HeadCell>通常每月開支（MOP）</Table.HeadCell>
+              <Table.HeadCell>開始濫用該毒品之年齡</Table.HeadCell>
+              <Table.HeadCell>頻率</Table.HeadCell>
+            </Table.Head>
+            <Table.Body>
+              <Table.Row>
+                <Table.Cell>
+                  K仔
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.ketUsageMethod}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.ketExpend}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.ketYearBegin}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.ketFrequency}
+                </Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>
+                  冰毒
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.metUsageMethod}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.metExpend}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.metYearBegin}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.metFrequency}
+                </Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>
+                  可卡因
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.cocUsageMethod}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.cocExpend}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.cocYearBegin}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.cocFrequency}
+                </Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>
+                  大麻
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.marUsageMethod}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.marExpend}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.marYearBegin}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.marFrequency}
+                </Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>
+                  海洛因
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.heroinUsageMethod}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.heroinExpend}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.heroinYearBegin}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.heroinFrequency}
+                </Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>
+                {client && client.otherDrugname}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.otherUsageMethod}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.otherExpend}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.otherYearBegin}
+                </Table.Cell>
+                <Table.Cell>
+                  {client && client.otherFrequency}
+                </Table.Cell>
+              </Table.Row>
+            </Table.Body>
+          </Table>
+        </div>
+
+
         
         <div
           className='p-3 max-w-2xl mx-auto w-full post-content'
