@@ -81,9 +81,9 @@ export default function ClientPage() {
         </h1>
         <p className='mb-2'>個案來源（康復處／重返廳／機構／自行申請／其他）：{client && client.refferFrom}</p>
         <div className='flex justify-between mb-2'>
-          <p>轉介社工：</p>
-          <p>轉介社工聯絡電話：</p>
-          <p>填表日期：</p>
+          <p>轉介社工：{client && client.refferWorker}</p>
+          <p>轉介社工聯絡電話：{client && client.refferWorkerTel}</p>
+          <p>填表日期：{client && client.registrationDate}</p>
         </div>
         <div className='mb-3'>
           <p className='mb-1'>基本資料：</p>

@@ -7,7 +7,7 @@ export const createClient = async (req, res, next) => {
     return next(errorHandler(403, 'You are not allowed to create a client'));
   }
 
-  if (!req.body.name || !req.body.description || !req.body.birthday || !req.body.gender) {
+  if (!req.body.name || !req.body.birthday || !req.body.gender) {
     return next(errorHandler(400, 'Please provide all required client fields'));
   }
 
