@@ -97,7 +97,7 @@ export default function CreateClient() {
         className='flex flex-col gap-4' 
         onSubmit={handleSubmit}
      >
-      <div className='flex flex-col justify-evenly sm:flex-row gap-1'>
+      <div className='flex flex-col justify-evenly sm:flex-row gap-4'>
           <div className='flex '>
             <label className=' flex items-center justify-center'>康復處☐ 重返廳  自行申請☐  機構  其他：</label>
             <TextInput
@@ -126,8 +126,8 @@ export default function CreateClient() {
         </div>
       </div>
 
-      <div className='flex flex-col sm:flex-row justify-between gap-1'>
-        <div className='flex'>
+      <div className='flex flex-col sm:flex-row justify-between gap-4'>
+        <div className='flex sm:w-1/2'>
           <label className=' flex items-center justify-center'>轉介社工：</label>
           <TextInput
               type='text'
@@ -140,7 +140,7 @@ export default function CreateClient() {
               }
             /> 
         </div>
-        <div className='flex'>
+        <div className='flex sm:w-1/2'>
           <label className=' flex items-center justify-center'>轉介社工電話：</label>
           <TextInput
                 type='text'
@@ -156,7 +156,7 @@ export default function CreateClient() {
         
       </div>
 
-      <div className='flex justify-between flex-col sm:flex-row gap-1'>
+      <div className='flex justify-between flex-col sm:flex-row gap-4'>
         <div className='flex'>
         <label className=' flex items-center justify-center'>英文姓名：</label>
           <TextInput
@@ -186,7 +186,7 @@ export default function CreateClient() {
         </div>
       </div>
 
-      <div className='flex justify-between flex-col sm:flex-row gap-1'>
+      <div className='flex justify-between flex-col sm:flex-row gap-4'>
           <div className='flex'>
             <label className=' flex items-center justify-center'>身份證號碼：</label>
             <TextInput
