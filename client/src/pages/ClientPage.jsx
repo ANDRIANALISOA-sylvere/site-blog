@@ -195,7 +195,7 @@ export default function ClientPage() {
           </div>
         </div>
 
-        <div className='mb-3'>
+        <div className='mb-20'>
           <p className='mb-1'>個人才能：</p>
           <div className='outline'>
             <div className='flex flex-col justify-between p-2  '>
@@ -271,124 +271,174 @@ export default function ClientPage() {
             </Table.Head>
             <Table.Body>
               <Table.Row>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   K仔
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.ketUsageMethod}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.ketExpend}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.ketYearBegin}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.ketFrequency}
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   冰毒
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.metUsageMethod}
-                </Table.Cell>
-                <Table.Cell>
+                </Table.Cell >
+                <Table.Cell className='py-0'>
                   {client && client.metExpend}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.metYearBegin}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.metFrequency}
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   可卡因
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.cocUsageMethod}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.cocExpend}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.cocYearBegin}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.cocFrequency}
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   大麻
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.marUsageMethod}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.marExpend}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.marYearBegin}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.marFrequency}
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   海洛因
-                </Table.Cell>
-                <Table.Cell>
+                </Table.Cell >
+                <Table.Cell className='py-0'>
                   {client && client.heroinUsageMethod}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.heroinExpend}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.heroinYearBegin}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.heroinFrequency}
                 </Table.Cell>
               </Table.Row>
               <Table.Row>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                 {client && client.otherDrugname}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.otherUsageMethod}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.otherExpend}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.otherYearBegin}
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell className='py-0'>
                   {client && client.otherFrequency}
                 </Table.Cell>
               </Table.Row>
             </Table.Body>
           </Table>
+          <p>註1. 如填其他，請註明毒品名稱</p>
+          <p>註2. 1.靜脈注射   2.肌肉注射  3.以香煙或煙管吸食 4.追龍 5.口服 6.鼻服 7.無一定方式 8.不詳 9.其他</p>
+        </div>
+
+        <div className='mb-3'> 
+          <p className='mb-1'>最近一次濫用毒品時間(單選)：</p>
+          <div className='flex flex-col outline'>
+            <div className='flex justify-between p-2  '>
+              <p>請填寫最近3個月(1-3個月) 或 最近6個月(3個月以上至6個月) 或 最近12個月(6個月以上至12個月):☐</p>
+                <p>{client && client.drug3month}</p>
+                <p>{client && client.drug6month}</p>
+                <p>{client && client.drug12month}</p>
+            </div>
+            <div className='flex p-2'>
+              <p>首次吸毒的年齡 <u>15{client && client.yearOfFirstAdict}</u> 歲 ，濫用毒品為: <u>冰{client && client.NameOfFirstAdict}</u> </p>
+            </div>
+            <div className='flex justify-between p-2'>
+              <p>吸毒的地區： <u>澳門{client && client.areaOfAdict}</u>，  </p> 
+              <p>吸毒的地點： <u>家中{client && client.placeOfAdict}</u>，  </p>
+              <p>吸毒厡因: <u>朋友影響{client && client.reasonOfAdict}</u></p>
+            </div>
+            <div className='flex justify-between p-2'>
+              <p>有否與別人共用針筒: <u>有{client && client.shareAyringe}</u>，  </p> 
+              <p>目前是否吸煙: <u>是{client && client.smoke}</u>，  </p>
+              <p>現時身體情況: <u>正常{client && client.bodyStatus}</u></p>
+            </div>
+            <div className='flex justify-between p-2'>
+              <p>曾/接受精神科或心理治療服務: <u>有{client && client.psychiatry}</u></p>
+              <p>曾/患有傳染性的疾病: <u>皮膚病{client && client.infectiiousDiseases}</u></p>
+            </div>
+          </div>
+        </div>
+
+        <div className='mb-3'> 
+          <p className='mb-1'>生活圈是否認識有人接觸毒品</p>
+          <div className='flex flex-col outline'>
+            
+            <div className='flex justify-between p-1'>
+              <p>家人有否吸毒: <u>有{client && client.adictFmily}</u> </p>
+              <p>有否目睹其他人吸毒: <u>有{client && client.seeOthersAdict}</u> </p>
+              <p>如果有，請填寫： <u>朋友{client && client.seeOthersAdictDetail}</u> </p>
+            </div>
+            
+          </div>
+        </div>
+
+        <div className='mb-3'> 
+          <p className='mb-1'>是否參與挪亞青年成長發展中心舉辦的小組、健康生活講座及工作坊：{client && client.joinClass}</p>
+          <p>備註：此資料僅作職業配對之用，與本中心並不存在僱傭關係  </p>
         </div>
 
 
         
-        <div
+        {/* <div
           className='p-3 max-w-2xl mx-auto w-full post-content'
           dangerouslySetInnerHTML={{ __html: client && client.description }}
-        ></div>
+        ></div> */}
       </div>
       <div className='flex justify-center mb-10'>
-        <button
-        onClick={handlePrint}
+        <Button
+          onClick={handlePrint}
+          outline gradientDuoTone='purpleToBlue'
         >
-          生成 PDF
-        </button>
+          下載檔案
+        </Button>
       </div>
     </main>
   );
