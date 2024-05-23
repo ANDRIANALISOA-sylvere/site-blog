@@ -74,7 +74,7 @@ export default function CreateClient() {
             },
             body: JSON.stringify(formData),
           });
-          console.log(formData);
+          // console.log(formData);
           const data = await res.json();
           console.log(data);
           if (!res.ok) {
@@ -98,12 +98,12 @@ export default function CreateClient() {
         onSubmit={handleSubmit}
      >
       <div className='flex flex-col justify-evenly sm:flex-row gap-4'>
-          <div className='flex '>
-            <label className=' flex items-center justify-center'>康復處☐ 重返廳  自行申請☐  機構  其他：</label>
+          <div className='flex w-full'>
+            <label className=' flex items-center justify-center'>個案來源：</label>
             <TextInput
               type='text'
-              placeholder='填寫單位名稱'
-              required
+              placeholder='康復處  重返廳  自行申請   機構'
+              // required
               id='clientname'
               className='flex-1 '
               onChange={(e) =>
@@ -111,12 +111,12 @@ export default function CreateClient() {
               }
             />
           </div>
-          <div className='flex'>
+          <div className='flex w-full'>
             <label className=' flex items-center justify-center'>登記日期：</label>
             <TextInput
                 type='date'
                 placeholder='登記日期：'
-                required
+                // required
                 id='clientname'
                 className='flex-1'
                 onChange={(e) =>
@@ -132,7 +132,7 @@ export default function CreateClient() {
           <TextInput
               type='text'
               placeholder='轉介社工：'
-              required
+              // required
               id='clientname'
               className='flex-1'
               onChange={(e) =>
@@ -145,7 +145,7 @@ export default function CreateClient() {
           <TextInput
                 type='text'
                 placeholder='轉介社工電話：'
-                required
+                // required
                 id='clientname'
                 className='flex-1'
                 onChange={(e) =>
@@ -157,7 +157,7 @@ export default function CreateClient() {
       </div>
 
       <div className='flex justify-between flex-col sm:flex-row gap-4'>
-        <div className='flex'>
+        <div className='flex w-full'>
         <label className=' flex items-center justify-center'>英文姓名：</label>
           <TextInput
             type='text'
@@ -171,7 +171,7 @@ export default function CreateClient() {
           />
         </div>
 
-        <div className='flex'>
+        <div className='flex w-full'>
           <label className=' flex items-center justify-center'>中文姓名：</label>
           <TextInput
               type='text'
@@ -186,143 +186,7 @@ export default function CreateClient() {
         </div>
       </div>
 
-      <div className='flex justify-between flex-col sm:flex-row gap-4'>
-          <div className='flex'>
-            <label className=' flex items-center justify-center'>身份證號碼：</label>
-            <TextInput
-                type='text'
-                placeholder='ID Number'
-                required
-                id='clientid'
-                className='flex-1'
-                onChange={(e) =>
-                  setFormData({ ...formData, idNum: e.target.value })
-                }
-            />
-          </div>
-          <div className='flex'>
-            <label className=' flex items-center justify-center'>出生日期：</label>
-            <TextInput
-              type='date'
-              placeholder='birthday'
-              required
-              id='clientname'
-              className='flex-1'
-              onChange={(e) =>
-                setFormData({ ...formData, birthday: e.target.value })
-              }
-            />
-          </div>
-        </div>
-
-      
-        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
-          <div className='flex'>
-          <label className=' flex items-center justify-center'>出生日期：</label>
-            <Select
-              onChange={(e) =>
-                setFormData({ ...formData, gender: e.target.value })
-              }
-              className='flex-1'
-            >
-              <option value='Gender'>Select a gender</option>
-              <option value='Male'>Male</option>
-              <option value='Female'>Female</option>
-            </Select>
-          </div>
-          <div className='flex'>
-            <label className=' flex items-center justify-center'>籍貫：</label>
-            <TextInput
-                type='text'
-                placeholder='籍貫'
-                required
-                id='clientname'
-                className='flex-1'
-                onChange={(e) =>
-                  setFormData({ ...formData, birthplace: e.target.value })
-                }
-              />
-          </div>
-          
-          
-        
-        </div>
-        <div className='flex gap-4'>
-          
-            <TextInput
-              type='text'
-              placeholder='身高'
-              required
-              id='clientname'
-              className='flex-1'
-              onChange={(e) =>
-                setFormData({ ...formData, height: e.target.value })
-              }
-            />
-            <TextInput
-              type='text'
-              placeholder='體重'
-              required
-              id='clientname'
-              className='flex-1'
-              onChange={(e) =>
-                setFormData({ ...formData, weight: e.target.value })
-              }
-            />
-            {/* <div>
-              <label>身體是否健全：</label>
-              <Select
-                required
-                id='clientname'
-                className='flex-1'
-                onChange={(e) =>
-                  setFormData({ ...formData, body: e.target.value })
-                }
-              >
-                <option value=''>請選擇</option>
-                <option value='健全'>健全</option>
-                <option value='不健全'>不健全</option>
-              </Select>
-            </div> */}
-            <div>
-              <label>身體是否健全：</label>
-              <div className='flex-1'>
-                <input
-                  type='radio'
-                  id='healthy'
-                  name='body'
-                  value='健全'
-                  onChange={(e) =>
-                    setFormData({ ...formData, body: e.target.value })
-                  }
-                />
-                <label htmlFor='healthy'>健全</label>
-                <input
-                  type='radio'
-                  id='unhealthy'
-                  name='body'
-                  value='不健全'
-                  onChange={(e) =>
-                    setFormData({ ...formData, body: e.target.value })
-                  }
-                />
-                <label htmlFor='unhealthy'>不健全</label>
-              </div>
-            </div>
-            
-            
-            <TextInput
-              type='text'
-              placeholder='是否有紋身'
-              required
-              id='clientname'
-              className='flex-1'
-              onChange={(e) =>
-                setFormData({ ...formData, tattoo: e.target.value })
-              }
-            />
-        </div>
-        <div className='flex justify-between'>
+      <div className='flex justify-between'>
           <div className='flex gap-4 items-center w-3/4 justify-between border-4 border-teal-500 border-dotted p-3'>
             <FileInput
               type='file'
@@ -358,18 +222,283 @@ export default function CreateClient() {
             />
           )}
         </div>
+
+      <div className='flex justify-between flex-col sm:flex-row gap-4'>
+          <div className='flex w-full'>
+            <label className=' flex items-center justify-center'>身份證號碼：</label>
+            <TextInput
+                type='text'
+                placeholder='ID Number'
+                // required
+                id='clientid'
+                className='flex-1'
+                onChange={(e) =>
+                  setFormData({ ...formData, idNum: e.target.value })
+                }
+            />
+          </div>
+          <div className='flex w-full'>
+            <label className=' flex items-center justify-center'>出生日期：</label>
+            <TextInput
+              type='date'
+              placeholder='birthday'
+              // required
+              id='clientname'
+              className='flex-1'
+              onChange={(e) =>
+                setFormData({ ...formData, birthday: e.target.value })
+              }
+            />
+          </div>
+        </div>
+
+      
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+          <div className='flex w-full'>
+            <label className=' flex items-center justify-center'>姓別：</label>
+              <Select
+                onChange={(e) =>
+                  setFormData({ ...formData, gender: e.target.value })
+                }
+                className='flex-1'
+              >
+                <option value='Gender'>Select a gender</option>
+                <option value='Male'>Male</option>
+                <option value='Female'>Female</option>
+              </Select>
+          </div>
+          <div className='flex w-full'>
+            <label className=' flex items-center justify-center'>籍貫：</label>
+            <TextInput
+                type='text'
+                placeholder='籍貫'
+                // required
+                id='clientname'
+                className='flex-1'
+                onChange={(e) =>
+                  setFormData({ ...formData, birthplace: e.target.value })
+                }
+              />
+          </div>
+        </div>
+
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+          <div className='flex w-full'>
+            <label className=' flex items-center justify-center'>身高：</label>
+            <TextInput
+                type='text'
+                placeholder='身高'
+                // required
+                id='clientname'
+                className='flex-1'
+                onChange={(e) =>
+                  setFormData({ ...formData, height: e.target.value })
+                }
+            />
+          </div>
+          <div className='flex w-full'>
+              <label className=' flex items-center justify-center'>體重：</label>
+              <TextInput
+                  type='text'
+                  placeholder='體重'
+                  // required
+                  id='clientname'
+                  className='flex-1'
+                  onChange={(e) =>
+                    setFormData({ ...formData, weight: e.target.value })
+                  }
+                />
+          </div>
+        </div>
+
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+
+          <div className='flex w-full'>
+              <label className=' flex items-center justify-center'>身體是否健全：</label>
+              <div className='flex-1'>
+                <input
+                  type='radio'
+                  id='healthy'
+                  name='body'
+                  value='健全'
+                  onChange={(e) =>
+                    setFormData({ ...formData, body: e.target.value })
+                  }
+                />
+                <label htmlFor='healthy' className='mr-2'>健全</label>
+                <input
+                  type='radio'
+                  id='unhealthy'
+                  name='body'
+                  value='不健全'
+                  onChange={(e) =>
+                    setFormData({ ...formData, body: e.target.value })
+                  }
+                />
+                <label htmlFor='unhealthy'>不健全</label>
+              </div>
+          </div>
+
+          <div className='flex w-full'>
+          <label className=' flex items-center justify-center'>紋身：</label>
+          <div className='flex-1'>
+                <input
+                  type='radio'
+                  id='healthy'
+                  name='tattoo'
+                  value='有紋身'
+                  onChange={(e) =>
+                    setFormData({ ...formData, tattoo: e.target.value })
+                  }
+                />
+                <label htmlFor='healthy' className='mr-2'>有紋身</label>
+                <input
+                  type='radio'
+                  id='unhealthy'
+                  name='tattoo'
+                  value='沒有紋身'
+                  onChange={(e) =>
+                    setFormData({ ...formData, tattoo: e.target.value })
+                  }
+                />
+                <label htmlFor='unhealthy'>沒有紋身</label>
+              </div>
+          </div>
+        </div>
+
+        
+
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+          <div className='flex w-full'>
+              <label className=' flex items-center justify-center'>婚姻狀況：</label>
+                <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, maritalStatus: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='不詳'>不詳</option>
+                  <option value='已婚'>已婚</option>
+                  <option value='未婚'>未婚</option>
+                  <option value='同居'>同居</option>
+                  <option value='喪偶'>喪偶</option>
+                  <option value='分居或離婚'>分居或離婚</option>
+                  
+                </Select>
+          </div>
+          <div className='flex w-full'>
+              <label className=' flex items-center justify-center'>與配偶關係：</label>
+                <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, spousalRealationship: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='良好'>良好</option>
+                  <option value='一般'>一般</option> 
+                  <option value='惡劣'>惡劣</option> 
+                </Select>
+          </div>
+        </div>
+
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+          <div className='flex w-full'>
+              <label className=' flex items-center justify-center'>子女數目：</label>
+              <TextInput
+                type='text'
+                placeholder='子女數目'
+                // required
+                id='clientname'
+                className='flex-1'
+                onChange={(e) =>
+                  setFormData({ ...formData, NumofChildren: e.target.value })
+                }
+            />
+          </div>
+          <div className='flex w-full'>
+              <label className=' flex items-center justify-center'>與父母關係：</label>
+                <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, parentingRelationship: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='良好'>良好</option>
+                  <option value='一般'>一般</option> 
+                  <option value='惡劣'>惡劣</option> 
+                </Select>
+          </div>
+        </div>
+
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+
+          <div className='flex w-full'>
+              <label className=' flex items-center justify-center'>犯罪記錄：</label>
+              <div className='flex-1 flex items-center'>
+                <input
+                  type='radio'
+                  id='criminal'
+                  name='behavior'
+                  value='有犯罪'
+                  onChange={(e) =>
+                    setFormData({ ...formData, criminalRecord: e.target.value })
+                  }
+                />
+                <label htmlFor='criminal' className='mr-2'>有</label>
+                <input
+                  type='radio'
+                  id='nonCriminal'
+                  name='behavior'
+                  value='沒有犯罪'
+                  onChange={(e) =>
+                    setFormData({ ...formData, criminalRecord: e.target.value })
+                  }
+                />
+                <label htmlFor='nonCriminal'>沒有</label>
+              </div>
+          </div>
+
+        <div className='flex w-full'>
+          <label className=' flex items-center justify-center'>案件名稱：</label>
+          <TextInput
+              type='text'
+              placeholder='案件名稱'
+              // required
+              id='clientname'
+              className='flex'
+              onChange={(e) =>
+                setFormData({ ...formData, caseName: e.target.value })
+              }
+            /> 
+        </div>
+        </div>
+
+        <div>
+          <label className=' flex '>案件詳情：</label>
+          <ReactQuill
+            theme='snow'
+            placeholder='請填寫刑期、緩刑、假釋、感化令等年期'
+            className='h-24 mb-12'
+            // required
+            onChange={(value) => {
+              setFormData({ ...formData, caseDetail: value });
+            }}
+          />
+        </div>
         
         <ReactQuill
           theme='snow'
           placeholder='Write description of the client'
           className='h-72 mb-12'
-          required
+          // required
           onChange={(value) => {
             setFormData({ ...formData, description: value });
           }}
         />
         <Button type='submit' gradientDuoTone='redToYellow'>
-          Publish
+          確定
         </Button>
         {publishError && (
           <Alert className='mt-5' color='failure'>

@@ -52,8 +52,9 @@ const clientSchema = new mongoose.Schema(
       trim:true
     },
     tattoo: {
-      type:Boolean,
-      default: false
+      type: String,
+      required:false,
+      trim:true
     },
     maritalStatus: { 
       type: String,
