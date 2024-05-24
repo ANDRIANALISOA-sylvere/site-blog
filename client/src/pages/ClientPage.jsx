@@ -87,7 +87,7 @@ export default function ClientPage() {
         </div>
         <div className='mb-3'>
           <p className='mb-1'>基本資料：</p>
-          <div className='flex justify-between outline'>
+          <div className='flex justify-between outline-1'>
             <div className='w-1/3 p-2 flex justify-center'>
               <img
                 src={client && client.image}
