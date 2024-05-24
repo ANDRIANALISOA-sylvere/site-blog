@@ -119,13 +119,13 @@ export default function ClientPage() {
         <div className='mb-3'>
           <p className='mb-1'>犯罪記錄：</p>
             <div className='flex justify-around p-2 outline'>
-              <p>是否有犯罪記錄：{client && client.criminalRecord}</p>
-              <p>案件名稱：{client && client.caseName} </p>
+              <p classname="w-full">是否有犯罪記錄：{client && client.criminalRecord}</p>
+              <p classname="w-full">案件名稱：{client && client.caseName} </p>
 {/*               <p>詳情（刑期、緩刑、感化令、假釋）：{client && client.caseDetail }</p> */}
               <div
-          className='p-3 max-w-2xl mx-auto w-full post-content'
-          dangerouslySetInnerHTML={{ __html: client && client.caseDetail }}
-        ></div> 
+                className=' max-w-2xl mx-auto w-full post-content'
+                dangerouslySetInnerHTML={{ __html: client && client.caseDetail }}
+              ></div> 
             </div>
         </div>
 
