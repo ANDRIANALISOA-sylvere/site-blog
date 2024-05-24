@@ -176,7 +176,7 @@ export default function ClientPage() {
 
         <div className='mb-3'>
           <p className='mb-1'>工作經驗及要求：</p>
-          <div className='outline'>
+          <div className='border border-slate-950'>
             <div className='flex justify-between p-2  '>
                 <p>職稱：{client && client.post1name}</p>
                 <p>公司名稱：{client && client.post1company} </p>
@@ -201,7 +201,7 @@ export default function ClientPage() {
 
         <div className='mb-20'>
           <p className='mb-1'>個人才能：</p>
-          <div className='outline'>
+          <div className='border border-slate-950'>
             <div className='flex flex-col justify-between p-2  '>
                 <p>專長：{client && client.strengths}</p>
                 <p>興趣：{client && client.interest} </p>
@@ -212,7 +212,7 @@ export default function ClientPage() {
 
         <div className='mb-3'>
           <p className='mb-1'>語言能力：</p>
-          <div className='outline flex justify-evenly'> 
+          <div className='border border-slate-950 flex justify-evenly'> 
               <div className='flex flex-col justify-between p-2  '>
                 <p>粵語：{client && client.cantonese}</p> 
                 <p>國語：{client && client.mandarin} </p>
@@ -237,7 +237,7 @@ export default function ClientPage() {
 
         <div className='mb-3'> 
           <p className='mb-1'>其他：</p>
-          <div className='outline'>
+          <div className='border border-slate-950'>
             <div className='flex justify-between p-2  '>
                 <p>駕照（貨櫃車／大巴士／巴士／貨車／小車／電單車／無）：{client && client.drivingLicense}</p>
                 <p>關於駕照的其他詳情：{client && client.drivingDetail} </p> 
@@ -265,7 +265,7 @@ export default function ClientPage() {
             <p>曾經濫藥（是 / 否）：{client && client.adict}</p>
           </div>
 
-          <Table className='outline'>
+          <Table className='border border-slate-950'>
             <Table.Head>
               <Table.HeadCell>毒品名稱</Table.HeadCell>
               <Table.HeadCell>通常使用該毒品的方法</Table.HeadCell>
@@ -384,7 +384,7 @@ export default function ClientPage() {
 
         <div className='mb-3'> 
           <p className='mb-1'>最近一次濫用毒品時間(單選)：</p>
-          <div className='flex flex-col outline'>
+          <div className='flex flex-col border border-slate-950'>
             <div className='flex justify-between p-2  '>
               <p>請填寫最近3個月(1-3個月) 或 最近6個月(3個月以上至6個月) 或 最近12個月(6個月以上至12個月):☐</p>
                 <p>{client && client.drug3month}</p>
@@ -413,7 +413,7 @@ export default function ClientPage() {
 
         <div className='mb-3'> 
           <p className='mb-1'>生活圈是否認識有人接觸毒品</p>
-          <div className='flex flex-col outline'>
+          <div className='flex flex-col border border-slate-950'>
             
             <div className='flex justify-between p-1'>
               <p>家人有否吸毒: <u>有{client && client.adictFmily}</u> </p>
