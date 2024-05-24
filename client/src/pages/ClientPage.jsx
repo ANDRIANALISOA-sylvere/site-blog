@@ -118,7 +118,7 @@ export default function ClientPage() {
         </div>
         <div className='mb-3'>
           <p className='mb-1'>犯罪記錄：</p>
-            <div className='flex justify-around p-2 outline'>
+            <div className='flex justify-around p-2 border border-slate-950'>
               <p classname="w-1/4">是否有犯罪記錄：{client && client.criminalRecord}</p>
               <p classname="w-1/4">案件名稱：{client && client.caseName} </p>
 {/*               <p>詳情（刑期、緩刑、感化令、假釋）：{client && client.caseDetail }</p> */}
@@ -131,7 +131,7 @@ export default function ClientPage() {
 
         <div className='mb-3'>
           <p className='mb-1'>家庭關係：</p>
-          <div className='flex justify-around outline'>
+          <div className='flex justify-around border border-slate-950'>
             <div className='flex flex-col justify-evenly w-1/3 p-2 '>
               <p>婚姻狀況：{client && client.maritalStatus}</p>
               <p>子女數目：{client && client.NumofChildren} </p>
@@ -145,7 +145,7 @@ export default function ClientPage() {
 
         <div className='mb-3'>
           <p className='mb-1'>聯絡資訊：</p>
-          <div className='flex justify-around outline'>
+          <div className='flex justify-around border border-slate-950'>
             <div className='flex flex-col justify-evenly w-2/3 p-2 '>
               <p>住址：{client && client.address}</p>
               <p>電郵：{client && client.emailAddress} </p>
@@ -159,7 +159,7 @@ export default function ClientPage() {
 
         <div className='mb-3'>
           <p className='mb-1'>學歷：</p>
-          <div className='outline'> 
+          <div className='border border-slate-950'> 
           <div className='flex justify-evenly p-2  '>
               <p>學校名稱（註明日間或夜間）：{client && client.school1}</p>
               <p>教育程度：{client && client.school1Sert} </p>
