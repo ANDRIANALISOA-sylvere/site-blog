@@ -75,7 +75,7 @@ export default function ClientPage() {
 
   return (
     <main  className='p-3 mx-auto min-h-screen px-5'>
-      <div ref={componentRef} className='p-3 flex flex-col max-w-6xl mx-auto min-h-screen'>
+      <div ref={componentRef} className='p-3 px-6 flex flex-col max-w-6xl mx-auto min-h-screen'>
         <h1 className='text-3xl mb-2  text-center font-serif max-w-2xl mx-auto lg:text-4xl'>
           申請表
         </h1>
