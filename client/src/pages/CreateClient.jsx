@@ -91,7 +91,7 @@ export default function CreateClient() {
         }
       };
   return (
-    <div className='p-3 max-w-3xl mx-auto min-h-screen'>
+    <div className='p-3 px-6 max-w-3xl mx-auto min-h-screen'>
       <h1 className='text-center text-3xl my-7 font-semibold'>申請表</h1>
       <form 
         className='flex flex-col gap-4' 
@@ -262,7 +262,7 @@ export default function CreateClient() {
                 }
                 className='flex-1'
               >
-                <option value='Gender'>Select a gender</option>
+                <option value='   '>Select a gender</option>
                 <option value='Male'>Male</option>
                 <option value='Female'>Female</option>
               </Select>
@@ -467,7 +467,7 @@ export default function CreateClient() {
               placeholder='案件名稱'
               // required
               id='clientname'
-              className='flex'
+              className='flex-1'
               onChange={(e) =>
                 setFormData({ ...formData, caseName: e.target.value })
               }
@@ -475,7 +475,7 @@ export default function CreateClient() {
         </div>
         </div>
 
-        <div>
+        <div className='mb-4'>
           <label className=' flex '>案件詳情：</label>
           <ReactQuill
             theme='snow'
@@ -487,16 +487,66 @@ export default function CreateClient() {
             }}
           />
         </div>
+
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+          <div className='flex w-full sm:w-2/3'>
+            <label className=' flex items-center justify-center '>住址：</label>
+            <TextInput
+                type='text'
+                placeholder='住址'
+                // required
+                id='clientname'
+                className='flex-1'
+                onChange={(e) =>
+                  setFormData({ ...formData, address: e.target.value })
+                }
+            />
+          </div>
+          <div className='flex w-full sm:w-1/3 '>
+              <label className=' flex items-center justify-center'>電話：</label>
+              <TextInput
+                  type='text'
+                  placeholder='電話'
+                  // required
+                  id='clientname'
+                  className='flex-1'
+                  onChange={(e) =>
+                    setFormData({ ...formData, phoneNum: e.target.value })
+                  }
+                />
+          </div>
+        </div>
+
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+          <div className='flex w-full sm:w-2/3'>
+            <label className=' flex items-center justify-center '>電郵地址：</label>
+            <TextInput
+                type='text'
+                placeholder='電郵地址'
+                // required
+                id='clientname'
+                className='flex-1'
+                onChange={(e) =>
+                  setFormData({ ...formData, emailAddress: e.target.value })
+                }
+            />
+          </div>
+          <div className='flex w-full sm:w-1/3 '>
+              <label className=' flex items-center justify-center'>微信：</label>
+              <TextInput
+                  type='text'
+                  placeholder='微信'
+                  // required
+                  id='clientname'
+                  className='flex-1' 
+                  onChange={(e) =>
+                    setFormData({ ...formData, wechat: e.target.value })
+                  }
+                />
+          </div>
+        </div>
         
-        <ReactQuill
-          theme='snow'
-          placeholder='Write description of the client'
-          className='h-72 mb-12'
-          // required
-          onChange={(value) => {
-            setFormData({ ...formData, description: value });
-          }}
-        />
+       
         <Button type='submit' gradientDuoTone='redToYellow'>
           確定
         </Button>
