@@ -77,8 +77,9 @@ const clientSchema = new mongoose.Schema(
       trim:true
     },
     criminalRecord: { 
-      type:Boolean,
-      default: false
+      type: String,
+      required:false,
+      trim:true
     },
     caseName: { //案件名稱
       type: String,

@@ -107,7 +107,7 @@ export default function ClientPage() {
             <div className='flex flex-col justify-evenly w-1/3 p-2 '>
               <div className='flex gap-4'>
                 <p>性別：{client && client.gender}</p>
-                <p>籍貫：</p>
+                <p>籍貫：{client && client.birthplace}</p>
               </div>
               <p>出生日期：{client && client.birthday}</p>
               <p>身體：{client && client.body}</p>
@@ -198,7 +198,7 @@ export default function ClientPage() {
               <div className='flex justify-between p-2'>
                 <p>公開就業職位：{client && client.employmentPost}</p>
                 <p>期望工作職位：{client && client.expactEmploymentPost}</p>
-                <p>期望薪資：{client && client.expactSalary}</p>
+                <p>期望薪資：MOP{client && client.expactSalary}</p>
               </div>
           </div>
         </div>
