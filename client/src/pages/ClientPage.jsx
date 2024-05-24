@@ -125,7 +125,6 @@ export default function ClientPage() {
               <div className='w-1/2 flex'>
                 <p>詳情（刑期、緩刑、感化令、假釋）：</p>
                 <div
-                  
                   dangerouslySetInnerHTML={{ __html: client && client.caseDetail }}
                 ></div> 
               </div>
