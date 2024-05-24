@@ -186,7 +186,7 @@ export default function CreateClient() {
             }
             value={formData.gender}
           >
-            <option value='Gender'>Select a gender</option>
+            <option value=' '>Select a gender</option>
             <option value='Male'>Male</option>
             <option value='Female'>Female</option>
           </Select>
