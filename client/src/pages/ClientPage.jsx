@@ -247,7 +247,7 @@ export default function ClientPage() {
       
         <div className='mb-3'> 
           <p className='mb-1'>個人習慣：</p>
-          <div className='flex flex-col outline'>
+          <div className='flex flex-col border border-slate-950'>
             <div className='flex justify-evenly p-2  '>
                 <p>賭博（高／中／低／沒有）：{client && client.gambling}</p>
                 <p>上網（高／中／低／沒有）：{client && client.internet}</p>
