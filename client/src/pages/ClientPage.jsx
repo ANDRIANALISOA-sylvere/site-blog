@@ -123,7 +123,7 @@ export default function ClientPage() {
               <p classname="w-full">案件名稱：{client && client.caseName} </p>
 {/*               <p>詳情（刑期、緩刑、感化令、假釋）：{client && client.caseDetail }</p> */}
               <div
-                className=' max-w-2xl mx-auto w-full post-content'
+                className='w-full'
                 dangerouslySetInnerHTML={{ __html: client && client.caseDetail }}
               ></div> 
             </div>
