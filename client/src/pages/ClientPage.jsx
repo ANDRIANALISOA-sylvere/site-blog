@@ -121,7 +121,8 @@ export default function ClientPage() {
             <div className='flex justify-around p-2 outline'>
               <p>是否有犯罪記錄：{client && client.criminalRecord}</p>
               <p>案件名稱：{client && client.caseName} </p>
-              <p>詳情（刑期、緩刑、感化令、假釋）：{client && client.caseDetail}</p>
+              <p dangerouslySetInnerHTML={{ __html: client && client.caseDetail }}>詳情（刑期、緩刑、感化令、假釋）：{client && client.caseDetail}</p>
+              
             </div>
         </div>
 
