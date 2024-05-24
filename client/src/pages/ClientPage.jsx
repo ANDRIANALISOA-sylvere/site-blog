@@ -107,7 +107,7 @@ export default function ClientPage() {
             <div className='flex flex-col justify-evenly w-1/3 p-2 '>
               <div className='flex gap-4'>
                 <p>性別：{client && client.gender}</p>
-                <p>籍貫：</p>
+                <p>籍貫：{client && client.birthplace}</p>
               </div>
               <p>出生日期：{client && client.birthday}</p>
               <p>身體：{client && client.body}</p>
