@@ -4,21 +4,23 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import PostCard from '../components/PostCard';
 
 export default function SearchClient() {
+  // State for sidebar data including search term, sort order, and category
   const [sidebarData, setSidebarData] = useState({
     searchTerm: '',
     sort: 'desc',
     category: 'uncategorized',
   });
 
-//   console.log(sidebarData);
+  // State for posts, loading status, and show more button visibility
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
+  // Hooks to access the navigation and location objects
   const location = useLocation();
-
   const navigate = useNavigate();
 
+  // Effect to fetch posts based on URL parameters
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get('searchTerm');
@@ -33,6 +35,7 @@ export default function SearchClient() {
       });
     }
 
+    // Function to fetch posts from the server
     const fetchPosts = async () => {
       setLoading(true);
       const searchQuery = urlParams.toString();
@@ -55,6 +58,7 @@ export default function SearchClient() {
     fetchPosts();
   }, [location.search]);
 
+  // Handler for input changes to update sidebar data
   const handleChange = (e) => {
     if (e.target.id === 'searchTerm') {
       setSidebarData({ ...sidebarData, searchTerm: e.target.value });
@@ -69,6 +73,7 @@ export default function SearchClient() {
     }
   };
 
+  // Handler for form submission to navigate with new URL parameters
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(location.search);
@@ -79,6 +84,7 @@ export default function SearchClient() {
     navigate(`/search?${searchQuery}`);
   };
 
+  // Handler to fetch more posts when "Show More" is clicked
   const handleShowMore = async () => {
     const numberOfPosts = posts.length;
     const startIndex = numberOfPosts;
@@ -100,6 +106,7 @@ export default function SearchClient() {
     }
   };
 
+  // Render function for the component
   return (
     <div className='flex flex-col md:flex-row'>search
       <div className='p-7 border-b md:border-r md:min-h-screen border-gray-500'>

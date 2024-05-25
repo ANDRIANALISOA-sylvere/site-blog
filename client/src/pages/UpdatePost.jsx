@@ -26,7 +26,7 @@ export default function UpdatePost() {
     const navigate = useNavigate();
     const { currentUser } = useSelector((state) => state.user);
 
-
+    // Fetch post data when component mounts or postId changes
     useEffect(() => {
         try {
           const fetchPost = async () => {
@@ -49,6 +49,7 @@ export default function UpdatePost() {
         }
       }, [postId]);
 
+    // Handle image upload
     const handleUpdloadImage = async () => {
         try {
           if (!file) {
@@ -86,6 +87,7 @@ export default function UpdatePost() {
         }
       };
 
+      // Handle form submission
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {

@@ -1,49 +1,47 @@
-import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react'; // Importing components from flowbite-react
+import ReactQuill from 'react-quill'; // Importing ReactQuill for rich text editing
+import 'react-quill/dist/quill.snow.css'; // Importing CSS for ReactQuill
 import {
   getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
-} from 'firebase/storage';
-import { app } from '../firebase';
-import { useEffect, useState } from 'react';
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-import { useNavigate,useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
+} from 'firebase/storage'; // Importing functions from firebase storage
+import { app } from '../firebase'; // Importing firebase app configuration
+import { useEffect, useState } from 'react'; // Importing hooks from React
+import { CircularProgressbar } from 'react-circular-progressbar'; // Importing CircularProgressbar for showing upload progress
+import 'react-circular-progressbar/dist/styles.css'; // Importing CSS for CircularProgressbar
+import { useNavigate, useParams } from 'react-router-dom'; // Importing hooks from react-router-dom
+import { useSelector } from 'react-redux'; // Importing useSelector hook from react-redux
 
 export default function CreateClient() {
-    const [file, setFile] = useState(null);
-    const [imageUploadProgress, setImageUploadProgress] = useState(null);
-    const [imageUploadError, setImageUploadError] = useState(null);
-    const [formData, setFormData] = useState({});
-    const [name, setName] = useState('')
-    const [chinesename, setChineseName] = useState('')
+    const [file, setFile] = useState(null); // State for storing the file object
+    const [imageUploadProgress, setImageUploadProgress] = useState(null); // State for tracking upload progress
+    const [imageUploadError, setImageUploadError] = useState(null); // State for storing any error during image upload
+    const [formData, setFormData] = useState({}); // State for storing form data
+    const [name, setName] = useState('') // State for storing name
+    const [chinesename, setChineseName] = useState('') // State for storing Chinese name
 
-    // console.log(formData);
-    const {clientId} = useParams()
+    const {clientId} = useParams() // Getting clientId from URL parameters
 
-    const [publishError, setPublishError] = useState(null);
+    const [publishError, setPublishError] = useState(null); // State for storing any error during form submission
   
-    const navigate = useNavigate();
-    const { currentUser } = useSelector((state) => state.user);
+    const navigate = useNavigate(); // Hook for navigating programmatically
+    const { currentUser } = useSelector((state) => state.user); // Getting currentUser from Redux store
 
     useEffect(() => {
       try {
         const fetchClient = async () => {
-          const res = await fetch(`/api/client/getclients?clientId=${clientId}`);
-          const data = await res.json();
+          const res = await fetch(`/api/client/getclients?clientId=${clientId}`); // Fetching client data
+          const data = await res.json(); // Parsing JSON response
           if (!res.ok) {
             console.log(data.message);
-            setPublishError(data.message);
+            setPublishError(data.message); // Setting publish error if response is not ok
             return;
           }
           if (res.ok) {
             setPublishError(null);
-            setFormData(data.clients[0]);
+            setFormData(data.clients[0]); // Setting form data if response is ok
           }
         };
   
@@ -56,30 +54,30 @@ export default function CreateClient() {
     const handleUpdloadImage = async () => {
         try {
           if (!file) {
-            setImageUploadError('Please select an image');
+            setImageUploadError('Please select an image'); // Setting error if no file is selected
             return;
           }
           setImageUploadError(null);
           const storage = getStorage(app);
-          const fileName = new Date().getTime() + '-' + file.name;
-          const storageRef = ref(storage, fileName);
-          const uploadTask = uploadBytesResumable(storageRef, file);
+          const fileName = new Date().getTime() + '-' + file.name; // Creating a unique file name
+          const storageRef = ref(storage, fileName); // Creating a reference to the storage location
+          const uploadTask = uploadBytesResumable(storageRef, file); // Starting the upload task
           uploadTask.on(
             'state_changed',
             (snapshot) => {
               const progress =
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              setImageUploadProgress(progress.toFixed(0));
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100; // Calculating upload progress
+              setImageUploadProgress(progress.toFixed(0)); // Updating upload progress state
             },
             (error) => {
-              setImageUploadError('Image upload failed');
+              setImageUploadError('Image upload failed'); // Setting error on upload failure
               setImageUploadProgress(null);
             },
             () => {
               getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                 setImageUploadProgress(null);
                 setImageUploadError(null);
-                setFormData({ ...formData, image: downloadURL });
+                setFormData({ ...formData, image: downloadURL }); // Updating form data with image URL
               });
             }
           );
@@ -91,27 +89,27 @@ export default function CreateClient() {
       };
 
       const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Preventing default form submission behavior
         try {
           const res = await fetch(`/api/client/updateclient/${formData._id}/${currentUser._id}`, {
-            method: 'PUT',
+            method: 'PUT', // Making a PUT request
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(formData), // Sending form data as JSON
           });
-          const data = await res.json();
+          const data = await res.json(); // Parsing JSON response
           if (!res.ok) {
-            setPublishError(data.message);
+            setPublishError(data.message); // Setting publish error if response is not ok
             return; 
           }
           
           if (res.ok) {
             setPublishError(null);
-            navigate(`/client/${data.slug}`);
+            navigate(`/client/${data.slug}`); // Navigating to the client page on successful update
           }
         } catch (error) {
-          setPublishError('Something went wrong');
+          setPublishError('Something went wrong'); // Setting error on catch
         }
       };
   return (
@@ -129,7 +127,7 @@ export default function CreateClient() {
             id='clientname'
             className='flex-1'
             onChange={(e) =>
-              setFormData({ ...formData, refferFrom: e.target.value })
+              setFormData({ ...formData, refferFrom: e.target.value }) // Updating form data on input change
             }
             value={formData.refferFrom}
           />
@@ -143,7 +141,7 @@ export default function CreateClient() {
             id='clientname'
             className='flex-1'
             onChange={(e) =>
-              setFormData({ ...formData, name: e.target.value })
+              setFormData({ ...formData, name: e.target.value }) // Updating form data on input change
             }
             value={formData.name}
           />
@@ -154,7 +152,7 @@ export default function CreateClient() {
             id='chinesename'
             className='flex-1'
             onChange={(e) =>
-              setFormData({ ...formData, chinesename: e.target.value })
+              setFormData({ ...formData, chinesename: e.target.value }) // Updating form data on input change
             }
             value={formData.chinesename}
           />
@@ -165,7 +163,7 @@ export default function CreateClient() {
             id='clientid'
             className='flex-1'
             onChange={(e) =>
-              setFormData({ ...formData, idNum: e.target.value })
+              setFormData({ ...formData, idNum: e.target.value }) // Updating form data on input change
             }
             value={formData.idNum}
           />
@@ -176,13 +174,13 @@ export default function CreateClient() {
             id='clientname'
             className='flex-1'
             onChange={(e) =>
-              setFormData({ ...formData, birthday: e.target.value })
+              setFormData({ ...formData, birthday: e.target.value }) // Updating form data on input change
             }
             value={formData.birthday}
           />
           <Select
             onChange={(e) =>
-              setFormData({ ...formData, gender: e.target.value })
+              setFormData({ ...formData, gender: e.target.value }) // Updating form data on select change
             }
             value={formData.gender}
           >
@@ -195,21 +193,21 @@ export default function CreateClient() {
           <FileInput
             type='file'
             accept='image/*'
-            onChange={(e) => setFile(e.target.files[0])}
+            onChange={(e) => setFile(e.target.files[0])} // Setting file on file input change
           />
           <Button
             type='button'
             gradientDuoTone='purpleToBlue'
             size='sm'
             outline
-            onClick={handleUpdloadImage}
+            onClick={handleUpdloadImage} // Handling image upload on button click
             disabled={imageUploadProgress}
           >
             {imageUploadProgress ? (
               <div className='w-16 h-16'>
                 <CircularProgressbar
                   value={imageUploadProgress}
-                  text={`${imageUploadProgress || 0}%`}
+                  text={`${imageUploadProgress || 0}%`} // Displaying upload progress
                 />
               </div>
             ) : (
@@ -231,7 +229,7 @@ export default function CreateClient() {
           className='h-72 mb-12'
           required
           onChange={(value) => {
-            setFormData({ ...formData, description: value });
+            setFormData({ ...formData, description: value }); // Updating form data on text editor change
           }}
           value={formData.description}
         />
@@ -240,7 +238,7 @@ export default function CreateClient() {
         </Button>
         {publishError && (
           <Alert className='mt-5' color='failure'>
-            {publishError}
+            {publishError} // Displaying publish error if any
           </Alert>
         )}
       </form>

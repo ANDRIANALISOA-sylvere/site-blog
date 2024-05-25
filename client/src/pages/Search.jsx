@@ -4,21 +4,26 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import PostCard from '../components/PostCard';
 
 export default function Search() {
+  // State to manage sidebar data such as search term, sorting, and category
   const [sidebarData, setSidebarData] = useState({
     searchTerm: '',
     sort: 'desc',
     category: 'uncategorized',
   });
 
-//   console.log(sidebarData);
+  // State to manage posts fetched from the API
   const [posts, setPosts] = useState([]);
+  // State to manage loading status
   const [loading, setLoading] = useState(false);
+  // State to manage visibility of the "Show More" button
   const [showMore, setShowMore] = useState(false);
 
+  // Hook to access the current location object
   const location = useLocation();
-
+  // Hook to perform navigation programmatically
   const navigate = useNavigate();
 
+  // Effect to fetch posts based on URL parameters
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get('searchTerm');
@@ -35,6 +40,7 @@ export default function Search() {
       });
     }
 
+    // Function to fetch posts from the server
     const fetchPosts = async () => {
       setLoading(true);
       const searchQuery = urlParams.toString();
@@ -57,6 +63,7 @@ export default function Search() {
     fetchPosts();
   }, [location.search]);
 
+  // Handler for changes in form inputs
   const handleChange = (e) => {
     if (e.target.id === 'searchTerm') {
       setSidebarData({ ...sidebarData, searchTerm: e.target.value });
@@ -72,6 +79,7 @@ export default function Search() {
 
   };
 
+  // Handler for form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(location.search);
@@ -82,6 +90,7 @@ export default function Search() {
     navigate(`/search?${searchQuery}`);
   };
 
+  // Handler for "Show More" button
   const handleShowMore = async () => {
     const numberOfPosts = posts.length;
     const startIndex = numberOfPosts;
@@ -103,6 +112,7 @@ export default function Search() {
     }
   };
 
+  // Render function for the Search component
   return (
     <div className='flex flex-col md:flex-row'>
       <div className='p-7 border-b md:border-r md:min-h-screen border-gray-500'>

@@ -1,15 +1,18 @@
 import Comment from '../models/comment.model.js';
 
+// Create a new comment
 export const createComment = async (req, res, next) => {
   try {
     const { content, postId, userId } = req.body;
 
+    // Check if the user is authorized to create the comment
     if (userId !== req.user.id) {
       return next(
         errorHandler(403, 'You are not allowed to create this comment')
       );
     }
 
+    // Create and save the new comment
     const newComment = new Comment({
       content,
       postId,
@@ -23,6 +26,7 @@ export const createComment = async (req, res, next) => {
   }
 };
 
+// Retrieve all comments for a specific post
 export const getPostComments = async (req, res, next) => {
   try {
     const comments = await Comment.find({ postId: req.params.postId }).sort({
@@ -34,6 +38,7 @@ export const getPostComments = async (req, res, next) => {
   }
 };
 
+// Like or unlike a comment
 export const likeComment = async (req, res, next) => {
   try {
     const comment = await Comment.findById(req.params.commentId);
@@ -55,6 +60,7 @@ export const likeComment = async (req, res, next) => {
   }
 };
 
+// Edit a comment
 export const editComment = async (req, res, next) => {
   try {
     const comment = await Comment.findById(req.params.commentId);
@@ -80,6 +86,7 @@ export const editComment = async (req, res, next) => {
   }
 };
 
+// Delete a comment
 export const deleteComment = async (req, res, next) => {
   try {
     const comment = await Comment.findById(req.params.commentId);
@@ -98,6 +105,7 @@ export const deleteComment = async (req, res, next) => {
   }
 };
 
+// Retrieve all comments with pagination and sorting
 export const getcomments = async (req, res, next) => {
   if (!req.user.isAdmin)
     return next(errorHandler(403, 'You are not allowed to get all comments'));

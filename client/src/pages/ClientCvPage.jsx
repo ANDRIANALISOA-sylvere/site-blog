@@ -1,45 +1,45 @@
 import { Button, Spinner } from 'flowbite-react';
-import { useEffect, useState,useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import {useReactToPrint} from "react-to-print"
+import { useReactToPrint } from "react-to-print"
 
 export default function ClientCvPage() {
-  const { clientCvSlug } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [clientCv, setClientCv] = useState(null);
+  const { clientCvSlug } = useParams(); // Retrieve the client CV slug from URL parameters
+  const [loading, setLoading] = useState(true); // State to handle loading status
+  const [error, setError] = useState(false); // State to handle error status
+  const [clientCv, setClientCv] = useState(null); // State to store client CV data
     // console.log(clientCv);
-    const componentRef = useRef();
+    const componentRef = useRef(); // Reference to the component for printing
   const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
+    content: () => componentRef.current, // Function to get the component to print
   });
 
 
   useEffect(() => {
     const fetchClientCv = async () => {
       try {
-        setLoading(true);
-        const res = await fetch(`/api/client/getclients?slug=${clientCvSlug}`);
+        setLoading(true); // Start loading
+        const res = await fetch(`/api/client/getclients?slug=${clientCvSlug}`); // Fetch client CV data
         const data = await res.json();
         
         // console.log(data);
         if (!res.ok) {
-          setError(true);
-          setLoading(false);
+          setError(true); // Set error if response is not OK
+          setLoading(false); // Stop loading
           return;
         }
         if (res.ok) {
-          setClientCv(data.clients[0]);
-          setLoading(false);
-          setError(false);
+          setClientCv(data.clients[0]); // Set client CV data
+          setLoading(false); // Stop loading
+          setError(false); // Clear error
         }
       } catch (error) {
-        setError(true);
-        setLoading(false);
+        setError(true); // Set error on exception
+        setLoading(false); // Stop loading
       }
     };
     fetchClientCv();
-  }, [clientCvSlug]);
+  }, [clientCvSlug]); // Effect dependencies
 
 
 

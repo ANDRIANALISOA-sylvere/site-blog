@@ -1,19 +1,19 @@
-import { Link } from 'react-router-dom';
-import CallToAction from '../components/CallToAction';
-import { useEffect, useState } from 'react';
-import PostCard from '../components/PostCard';
+import { Link } from 'react-router-dom'; // Import Link component from react-router-dom for navigation
+import CallToAction from '../components/CallToAction'; // Import CallToAction component from components folder
+import { useEffect, useState } from 'react'; // Import useEffect and useState hooks from React
+import PostCard from '../components/PostCard'; // Import PostCard component from components folder
 
 export default function Home() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]); // Initialize state for posts with an empty array
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const res = await fetch('/api/post/getPosts?limit=5');
-      const data = await res.json();
-      setPosts(data.posts);
+    const fetchPosts = async () => { // Define an asynchronous function to fetch posts
+      const res = await fetch('/api/post/getPosts?limit=5'); // Fetch posts with a limit of 5 from the API
+      const data = await res.json(); // Convert the response to JSON
+      setPosts(data.posts); // Update the posts state with the fetched data
     };
-    fetchPosts();
-  }, []);
+    fetchPosts(); // Call the fetchPosts function when the component mounts
+  }, []); // Empty dependency array means this effect runs only once after the initial render
   return (
     <div>
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
@@ -39,7 +39,7 @@ export default function Home() {
             <h2 className='text-2xl font-semibold text-center'>Recent Posts</h2>
             <div className='flex flex-wrap gap-4 justify-center'>
               {posts.map((post) => (
-                <PostCard key={post._id} post={post} />
+                <PostCard key={post._id} post={post} /> // Map through posts and render a PostCard for each post
               ))}
             </div>
             <Link

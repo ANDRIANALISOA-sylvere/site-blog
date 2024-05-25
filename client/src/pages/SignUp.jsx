@@ -9,29 +9,35 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Handle input changes and update formData state
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
   // console.log(formData);
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault()
+    // Check if all fields are filled
     if (!formData.username || !formData.email || !formData.password) {
       return setErrorMessage('Please fill out all fields.');
     }
     try {
       setLoading(true);
       setErrorMessage(null);
+      // Send POST request to server
       const res = await fetch ('/api/auth/signup', {
         method:'POST',
         headers: {'Content-Type':'application/json'},
         body:JSON.stringify(formData)
       })
       const data = await res.json()
+      // Handle failure from server
       if (data.success === false) {
         return setErrorMessage(data.message);
       }
       setLoading(false);
+      // Navigate to sign-in page on success
       if(res.ok) {
         navigate('/sign-in');
       }
