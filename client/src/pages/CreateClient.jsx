@@ -8,10 +8,20 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
+import Select1 from 'react-select';
+
+const drivingOptions = [
+  { value: '貨櫃車 ', label: '貨櫃車' },
+  { value: '大巴士 ', label: '大巴士' },
+  { value: '巴士 ', label: '巴士' },
+  { value: '貨車 ', label: '貨車' },
+  { value: '小車 ', label: '小車' },
+  { value: '電單車 ', label: '電單車' },
+];
 
 
 export default function CreateClient() {
@@ -19,7 +29,14 @@ export default function CreateClient() {
     const [imageUploadProgress, setImageUploadProgress] = useState(null);
     const [imageUploadError, setImageUploadError] = useState(null);
     const [formData, setFormData] = useState({});
+
+    const [selectedDrivingOption, setSelectedDrivingOption] = React.useState([]);
     
+    const handleChange = (option) => {
+      setSelectedDrivingOption(option);
+      // 更新formData
+      setFormData({ ...formData, drivingLicense: option.map(o => o.value) });
+    };
 
     console.log(formData);
     const [publishError, setPublishError] = useState(null);
@@ -156,6 +173,7 @@ export default function CreateClient() {
         
       </div>
 
+      <p className='mt-4'>基本資料：</p>
       <div className='flex justify-between flex-col sm:flex-row gap-4'>
         <div className='flex w-full'>
         <label className=' flex items-center justify-center'>英文姓名：</label>
@@ -432,7 +450,7 @@ export default function CreateClient() {
           </div>
         </div>
 
-        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+        <div className='flex flex-col gap-4 sm:flex-row justify-between mt-4'>
 
           <div className='flex w-full'>
               <label className=' flex items-center justify-center'>犯罪記錄：</label>
@@ -859,6 +877,250 @@ export default function CreateClient() {
                   }
                 />
           </div>
+        </div>
+
+
+        <p className='mt-4'>語言能力：</p>
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+          <div className='flex w-full sm:w-1/2 '>
+              <label className=' flex items-center justify-center'>粵語：</label>
+                <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, cantonese: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='熟悉'>熟悉</option>
+                  <option value='一般'>一般</option>
+                  <option value='略懂'>略懂</option> 
+                  <option value='不懂'>不懂</option> 
+                </Select>
+          </div>
+          <div className='flex w-full sm:w-1/2 '>
+              <label className=' flex items-center justify-center'>國語：</label>
+                <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, mandarin: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='熟悉'>熟悉</option>
+                  <option value='一般'>一般</option>
+                  <option value='略懂'>略懂</option> 
+                  <option value='不懂'>不懂</option> 
+                </Select>
+          </div>
+          
+        </div>
+
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+          <div className='flex w-full sm:w-1/2 '>
+              <label className=' flex items-center justify-center'>英語：</label>
+                <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, english: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='熟悉'>熟悉</option>
+                  <option value='一般'>一般</option>
+                  <option value='略懂'>略懂</option> 
+                  <option value='不懂'>不懂</option> 
+                </Select>
+          </div>
+          <div className='flex w-full sm:w-1/2 '>
+              <label className=' flex items-center justify-center'>葡語：</label>
+                <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, portuguese: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='熟悉'>熟悉</option>
+                  <option value='一般'>一般</option>
+                  <option value='略懂'>略懂</option> 
+                  <option value='不懂'>不懂</option> 
+                </Select>
+          </div>
+          
+        </div>
+
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+          <div className='flex w-full sm:w-1/3 '>
+              <label className=' flex items-center justify-center'>聽寫：</label>
+                <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, listenAndWriting: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='熟悉'>熟悉</option>
+                  <option value='一般'>一般</option>
+                  <option value='略懂'>略懂</option> 
+                  <option value='不懂'>不懂</option> 
+                </Select>
+          </div>
+          <div className='flex w-full sm:w-1/3 '>
+              <label className=' flex items-center justify-center'>速記：</label>
+                <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, shorthand: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='熟悉'>熟悉</option>
+                  <option value='一般'>一般</option>
+                  <option value='略懂'>略懂</option> 
+                  <option value='不懂'>不懂</option> 
+                </Select>
+          </div>
+          <div className='flex w-full sm:w-1/3 '>
+              <label className=' flex items-center justify-center'>中文輸入：</label>
+                <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, chineseType: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='倉頡'>倉頡</option>
+                  <option value='速成'>速成</option>
+                  <option value='五筆'>五筆</option>
+                  <option value='拼音'>拼音</option>
+                </Select>
+          </div>
+          
+        </div>
+
+        <p className='mt-4'>文書處理：</p>
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+          <div className='flex w-full sm:w-1/3 '>
+              <label className=' flex items-center justify-center'>聽寫：</label>
+              <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, listenAndWriting: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='熟悉'>熟悉</option>
+                  <option value='一般'>一般</option>
+                  <option value='略懂'>略懂</option> 
+                  <option value='不懂'>不懂</option> 
+                </Select>
+          </div>
+          <div className='flex w-full sm:w-1/3 '>
+              <label className=' flex items-center justify-center'>速記：</label>
+              <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, shorthand: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='熟悉'>熟悉</option>
+                  <option value='一般'>一般</option>
+                  <option value='略懂'>略懂</option> 
+                  <option value='不懂'>不懂</option> 
+                </Select>
+          </div>
+          <div className='flex w-full sm:w-1/3 '>
+              <label className=' flex items-center justify-center'>中文輸入：</label>
+              <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, chineseType: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='熟悉'>熟悉</option>
+                  <option value='一般'>一般</option>
+                  <option value='略懂'>略懂</option> 
+                  <option value='不懂'>不懂</option> 
+                </Select>
+          </div>
+        </div>
+
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+          <div className='flex w-full sm:w-1/3 '>
+              <label className=' flex items-center justify-center'>Word：</label>
+              <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, word: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='熟悉'>熟悉</option>
+                  <option value='一般'>一般</option>
+                  <option value='略懂'>略懂</option> 
+                  <option value='不懂'>不懂</option> 
+                </Select>
+          </div>
+          <div className='flex w-full sm:w-1/3 '>
+              <label className=' flex items-center justify-center'>Excel：</label>
+              <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, excel: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='熟悉'>熟悉</option>
+                  <option value='一般'>一般</option>
+                  <option value='略懂'>略懂</option> 
+                  <option value='不懂'>不懂</option> 
+                </Select>
+          </div>
+          <div className='flex w-full sm:w-1/3 '>
+              <label className=' flex items-center justify-center'>PowerPoint：</label>
+              <Select
+                  onChange={(e) =>
+                    setFormData({ ...formData, powerpoint: e.target.value })
+                  }
+                  className='flex-1'
+                >
+                  <option value='未知'>未知</option>
+                  <option value='熟悉'>熟悉</option>
+                  <option value='一般'>一般</option>
+                  <option value='略懂'>略懂</option> 
+                  <option value='不懂'>不懂</option> 
+                </Select>
+          </div>
+        </div>
+
+        <p className='mt-4'>其他：</p>
+        <div className='flex flex-col gap-4 sm:flex-row justify-between'>
+          <div className='flex w-full '>
+            <label className=' flex items-center justify-center'>駕駛執照：</label>
+            <Select1
+              isMulti
+              value={selectedDrivingOption}
+              onChange={handleChange}
+              options={drivingOptions}
+              className='flex-1'
+            />
+          </div>
+          <div className='flex items-center w-full'>
+              <label className=' flex items-center justify-center'>關於駕照的其他詳情：：</label>
+              <TextInput
+                  type='text'
+                  placeholder='關於駕照的其他詳情'
+                  // required
+                  id='clientname'
+                  className='flex-1' 
+                  onChange={(e) =>
+                    setFormData({ ...formData, drivingDetail: e.target.value })
+                  }
+                />
+          </div>
+              
+          
         </div>
         
        

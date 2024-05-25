@@ -272,7 +272,7 @@ const clientSchema = new mongoose.Schema(
       trim:true
     },
     drivingLicense: { 
-      type: String,
+      type: [String],
       required:false,
       trim:true
     },
