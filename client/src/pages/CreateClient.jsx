@@ -23,6 +23,22 @@ const drivingOptions = [
   { value: '電單車 ', label: '電單車' },
 ];
 
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    backgroundColor: '#f4f5f7',
+    borderColor: '#dfe1e6',
+    borderRadius: '5px',
+    padding: '5px',
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isSelected ? '#0052cc' : state.isFocused ? '#deebff' : null,
+    color: state.isSelected ? '#fff' : '#172b4d',
+    cursor: 'pointer',
+  }),
+};
+
 
 export default function CreateClient() {
     const [file, setFile] = useState(null);
@@ -1104,6 +1120,7 @@ export default function CreateClient() {
               onChange={handleChange}
               options={drivingOptions}
               className='flex-1'
+              styles={customStyles}
             />
           </div>
           <div className='flex items-center w-full'>
